@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @admin_app.name %>
+</p>
+
+<p>
+  <strong>Access key:</strong>
+  <%= @admin_app.access_key %>
+</p>
+
+<p>
+  <strong>Secret key:</strong>
+  <%= @admin_app.secret_key %>
+</p>
+
+<p>
+  <strong>Permission level:</strong>
+  <%= @admin_app.permission_level %>
+</p>
+
+<p>
+  <strong>Enable:</strong>
+  <%= @admin_app.enable %>
+</p>
+
+<%= link_to 'Edit', edit_admin_app_path(@admin_app) %> |
+<%= link_to 'Back', admin_apps_path %>

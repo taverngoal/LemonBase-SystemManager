@@ -27,6 +27,7 @@ gem 'faraday'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 gem 'wice_grid'
 gem 'simple_form'
+gem 'sorcery'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
