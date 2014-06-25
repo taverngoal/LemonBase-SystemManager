@@ -3,7 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #home_index{}
-  #home_index header { height:120px; background-color: #3686be; color: #fff }
+  #home_index header { height:120px; background-color: #3686be; color: #fff; padding: 25px 0;}
+    #home_index header .container { line-height: 70px;height: 70px }
+    #home_index header button { border:none; border-radius:0}
   #home_index .homepage-header { height: 520px; width: 100%; background-color:#3686be }
     #home_index .homepage-header .wrapper-full{ height: 440px; color:#fff; padding: 100px 0 60px 0;}
       #home_index .homepage-header .wrapper-full h1{ text-align: center; padding:0; margin:0; font-weight: normal; font-size:48px}
