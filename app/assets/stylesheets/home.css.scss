@@ -3,13 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #home_index{}
-  #home_index header { height:120px; background-color: #3686be; color: #fff; padding: 25px 0;}
+  #home_index header { height:120px; background-color: #FFCC00; color: #fff; padding: 25px 0;}
     #home_index header .container { line-height: 70px;height: 70px }
-    #home_index header button { border:none; border-radius:0}
-  #home_index .homepage-header { height: 520px; width: 100%; background-color:#3686be }
+    #home_index header .btn { border:none; border-radius:0; color:#FF9900}
+  #home_index .homepage-header { height: 520px; width: 100%; background-color:#FFCC00 }
     #home_index .homepage-header .wrapper-full{ height: 440px; color:#fff; padding: 100px 0 60px 0;}
       #home_index .homepage-header .wrapper-full h1{ text-align: center; padding:0; margin:0; font-weight: normal; font-size:48px}
-    #home_index .homepage-header .announcement{ height: 80px; background-color: #2b74a7; line-height: 80px; color:#fff; font-size: 24px; }
+    #home_index .homepage-header .announcement{ height: 80px; background-color: #FF9900; line-height: 80px; color:#fff; font-size: 24px; }
   #home_index footer {background: #2e3234; padding: 100px 0 60px 0;color: #747474;float: left; width: 100%; height:400px}
   #home_index > .homepage-panel { height:400px; padding: 100px 0 60px 0; }
   #home_index > .homepage-panel { background-color: #fff }
