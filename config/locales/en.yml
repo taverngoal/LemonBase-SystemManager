@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  nav:
+    user_label: Users
+    app_label: Applications
+    home_label: Home
+

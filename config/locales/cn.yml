@@ -1,0 +1,5 @@
+cn:
+  nav:
+    user_label: 用户
+    app_label: 应用
+    home_label: "首页"

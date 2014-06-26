@@ -1,4 +1,4 @@
-class Admin::AppsController < ApplicationController
+class Admin::AppsController < Admin::BaseController
   before_action :set_admin_app, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/apps

@@ -1,4 +1,6 @@
+require './app/api/users'
 Rails.application.routes.draw do
+  mount UsersAPI => '/api/users'
   get 'admin/index'
 
   get 'home/index'
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   resources :users
   namespace :admin do
     resources :apps
+    resources :users
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
