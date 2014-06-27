@@ -16,3 +16,4 @@
 /tmp
 /.idea
 /db/*.sqlite3
+Gemfile.lock
