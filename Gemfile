@@ -30,9 +30,9 @@ gem 'simple_form'
 gem 'sorcery'
 gem 'grape'
 
-# group :linux do
-#   gem 'therubyracer'
-# end
+group :linux do
+  gem 'therubyracer'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
