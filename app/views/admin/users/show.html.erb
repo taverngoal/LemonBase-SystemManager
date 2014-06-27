@@ -1,44 +1,34 @@
+<%= render 'nav' %>
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= t 'simple_form.labels.user.email' %>:</strong>
   <%= @admin_user.email %>
 </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @admin_user.password %>
-</p>
 
 <p>
-  <strong>Password confirmation:</strong>
-  <%= @admin_user.password_confirmation %>
-</p>
-
-<p>
-  <strong>Name:</strong>
+  <strong><%= t 'simple_form.labels.user.name' %>:</strong>
   <%= @admin_user.name %>
 </p>
 
 <p>
-  <strong>Nick:</strong>
+  <strong><%= t 'simple_form.labels.user.nick' %>:</strong>
   <%= @admin_user.nick %>
 </p>
 
 <p>
-  <strong>Birth:</strong>
+  <strong><%= t 'simple_form.labels.user.birth' %>:</strong>
   <%= @admin_user.birth %>
 </p>
 
 <p>
-  <strong>Address:</strong>
+  <strong><%= t 'simple_form.labels.user.address' %>:</strong>
   <%= @admin_user.address %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
+  <strong><%= t 'simple_form.labels.user.phone' %>:</strong>
   <%= @admin_user.phone %>
 </p>
 
-<%= link_to 'Edit', edit_admin_user_path(@admin_user) %> |
-<%= link_to 'Back', admin_users_path %>
