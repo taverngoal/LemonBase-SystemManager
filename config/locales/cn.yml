@@ -3,3 +3,15 @@ cn:
     user_label: 用户
     app_label: 应用
     home_label: "首页"
+    back_to_front: "返回前端"
+  breadcrumbs:
+    admin:
+      base:
+        index: 管理首页
+      apps:
+        controller: 应用
+        index: 列表
+        new: 添加
+        edit: 修改
+        show: 详细信息
+

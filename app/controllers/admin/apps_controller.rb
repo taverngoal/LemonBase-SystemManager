@@ -1,24 +1,29 @@
 class Admin::AppsController < Admin::BaseController
+  add_breadcrumb :controller, action: :index
   before_action :set_admin_app, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/apps
   # GET /admin/apps.json
   def index
+    add_breadcrumb :index, :index
     @admin_apps = App.all
   end
 
   # GET /admin/apps/1
   # GET /admin/apps/1.json
   def show
+    add_breadcrumb :show, :show
   end
 
   # GET /admin/apps/new
   def new
+    add_breadcrumb :new, :new
     @admin_app = App.new
   end
 
   # GET /admin/apps/1/edit
   def edit
+    add_breadcrumb :edit, :edit
   end
 
   # POST /admin/apps

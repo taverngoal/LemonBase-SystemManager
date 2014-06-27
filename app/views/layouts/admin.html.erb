@@ -11,33 +11,35 @@
   <!--<header></header>-->
   <div class="container">
     <section class="row">
-      <div class="col-sm-2">
+      <div class="col-sm-2 sider">
         <div style="height: 200px; font-size: 150px; margin:0 0 0px 20px; color:#FFCC00 "><i class="fa fa-lemon-o"></i>
         </div>
         <ul class="nav nav-pills nav-stacked">
-          <li class="active">
+          <li class="<%= 'active' if controller_name == 'admin' and action_name == 'index' %>">
             <a href="<%= url_for controller: '/admin', action: :index %>">
               <%= t 'nav.home_label' %>
             </a>
           </li>
-          <li>
+          <li class="<%= 'active' if controller_name == 'apps' %>">
             <a href="<%= url_for controller: 'admin/apps', action: :index %>">
               <span class="badge pull-right">42</span>
               <%= t 'nav.app_label' %>
             </a>
           </li>
-          <li>
+          <li class="<%= 'active' if controller_name == 'users' %>">
             <a href="<%= url_for controller: 'admin/users', action: :index %>">
               <%= t 'nav.user_label' %>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="<%= home_index_url %>">
+              <%= t 'nav.back_to_front' %>
             </a>
           </li>
         </ul>
       </div>
       <div class="col-sm-10 content">
+        <%= render_breadcrumbs %>
         <%= yield %>
       </div>
     </section>
