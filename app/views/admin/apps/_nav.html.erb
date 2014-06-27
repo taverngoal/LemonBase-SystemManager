@@ -2,5 +2,7 @@
   <ul class="nav nav-pills center-block pull-right">
     <li class="<%= 'active' if action_name=='index' %>"><%= link_to "#{t 'breadcrumbs.admin.apps.index'}", admin_apps_url %> </li>
     <li class="<%= 'active' if action_name=='new' %>"><%= link_to "#{t 'breadcrumbs.admin.apps.new'}", action: :new %> </li>
+    <li class="<%= 'active' if action_name=='edit' %><%= 'hidden' if action_name != 'edit' %>"><%= link_to "#{t 'breadcrumbs.admin.apps.edit'}" %> </li>
   </ul>
 </div>
+<br>

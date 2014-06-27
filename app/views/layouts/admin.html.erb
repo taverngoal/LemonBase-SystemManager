@@ -26,12 +26,13 @@
           </li>
           <li class="<%= 'active' if controller_name == 'apps' %>">
             <a href="<%= url_for controller: 'admin/apps', action: :index %>">
-              <span class="badge pull-right">42</span>
+              <span class="badge pull-right"><%= App.count %></span>
               <%= t 'nav.app_label' %>
             </a>
           </li>
           <li class="<%= 'active' if controller_name == 'users' %>">
             <a href="<%= url_for controller: 'admin/users', action: :index %>">
+              <span class="badge pull-right"><%= User.count %></span>
               <%= t 'nav.user_label' %>
             </a>
           </li>

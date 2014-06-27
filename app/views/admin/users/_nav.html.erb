@@ -1,0 +1,8 @@
+<div class="clearfix">
+  <ul class="nav nav-pills center-block pull-right">
+    <li class="<%= 'active' if action_name=='index' %>"><%= link_to "#{t 'breadcrumbs.admin.users.index'}", admin_users_url %> </li>
+    <li class="<%= 'active' if action_name=='new' %>"><%= link_to "#{t 'breadcrumbs.admin.users.new'}", action: :new %> </li>
+    <li class="<%= 'active' if action_name=='edit' %><%= 'hidden' if action_name != 'edit' %>"><%= link_to "#{t 'breadcrumbs.admin.users.edit'}" %> </li>
+  </ul>
+</div>
+<br>

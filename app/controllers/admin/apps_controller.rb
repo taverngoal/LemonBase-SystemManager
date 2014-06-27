@@ -6,7 +6,7 @@ class Admin::AppsController < Admin::BaseController
   # GET /admin/apps.json
   def index
     add_breadcrumb :index, :index
-    @admin_apps = App.all
+    @admin_apps = initialize_grid(App, per_page: 20)
   end
 
   # GET /admin/apps/1

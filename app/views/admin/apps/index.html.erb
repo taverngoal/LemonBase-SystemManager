@@ -1,34 +1,32 @@
 <%= render 'nav' %>
-<h1>Listing admin_apps</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Access key</th>
-      <th>Secret key</th>
-      <th>Permission level</th>
-      <th>Enable</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= grid(@admin_apps, show_filters: :no) do |g|
 
-  <tbody>
-    <% @admin_apps.each do |admin_app| %>
-      <tr>
-        <td><%= admin_app.name %></td>
-        <td><%= admin_app.access_key %></td>
-        <td><%= admin_app.secret_key %></td>
-        <td><%= admin_app.permission_level %></td>
-        <td><%= admin_app.enable %></td>
-        <td><%= link_to 'Show', [:admin, admin_app] %></td>
-        <td><%= link_to 'Edit', edit_admin_app_path([:admin, admin_app]) %></td>
-        <td><%= link_to 'Destroy', [:admin, admin_app], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column name: 'ID' do |app|
+    app.id
+  end
 
-<br>
+  g.column name: t('simple_form.labels.app.name') do |app|
+    link_to(app.name, admin_app_path(app))
+  end
 
-<%= link_to 'New App', new_admin_app_path %>
+
+  g.column name: t('simple_form.labels.app.access_key') do |app|
+    app.access_key
+  end
+
+
+  g.column name: t('simple_form.labels.app.permission_level') do |app|
+    app.permission_level
+  end
+
+  g.column name: t('simple_form.labels.app.enable') do |app|
+    app.enable ? '可用' : '禁用'
+  end
+
+
+  g.column name: t('buttons.actions') do |app|
+    link_to(t('buttons.edit'), edit_admin_app_path(app))+ " " +
+            link_to(t('buttons.delete'), {action: :destroy, id: app.id}, method: :delete, data: {confirm: '确定删除?'})
+  end
+end -%>

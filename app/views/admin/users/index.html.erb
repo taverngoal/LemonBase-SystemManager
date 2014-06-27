@@ -1,39 +1,40 @@
-<h1>Listing admin_users</h1>
+<%= render 'nav' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Password</th>
-      <th>Password confirmation</th>
-      <th>Name</th>
-      <th>Nick</th>
-      <th>Birth</th>
-      <th>Address</th>
-      <th>Phone</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= grid(@admin_users, show_filters: :no) do |g|
 
-  <tbody>
-    <% @admin_users.each do |admin_user| %>
-      <tr>
-        <td><%= admin_user.email %></td>
-        <td><%= admin_user.password %></td>
-        <td><%= admin_user.password_confirmation %></td>
-        <td><%= admin_user.name %></td>
-        <td><%= admin_user.nick %></td>
-        <td><%= admin_user.birth %></td>
-        <td><%= admin_user.address %></td>
-        <td><%= admin_user.phone %></td>
-        <td><%= link_to 'Show', admin_user %></td>
-        <td><%= link_to 'Edit', edit_admin_user_path(admin_user) %></td>
-        <td><%= link_to 'Destroy', admin_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column name: 'ID' do |app|
+    app.id
+  end
 
-<br>
+  g.column name: t('simple_form.labels.user.name') do |app|
+    link_to(app.name, admin_user_path(app))
+  end
 
-<%= link_to 'New User', new_admin_user_path %>
+
+  g.column name: t('simple_form.labels.user.email') do |app|
+    app.email
+  end
+
+
+  g.column name: t('simple_form.labels.user.nick') do |app|
+    app.nick
+  end
+
+  g.column name: t('simple_form.labels.user.birth') do |app|
+    app.birth
+  end
+
+  g.column name: t('simple_form.labels.user.address') do |app|
+    app.address
+  end
+
+  g.column name: t('simple_form.labels.user.phone') do |app|
+    app.phone
+  end
+
+
+  g.column name: t('buttons.actions') do |app|
+    link_to(t('buttons.edit'), edit_admin_user_path(app))+ " " +
+            link_to(t('buttons.delete'),  {action: :destroy, id: app.id}, method: :delete, data: {confirm: '确定删除?'})
+  end
+end -%>

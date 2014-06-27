@@ -14,4 +14,41 @@ cn:
         new: 添加
         edit: 修改
         show: 详细信息
+      users:
+        controller: 用户
+        index: 列表
+        new: 添加
+        edit: 修改
+        show: 详细信息
+  buttons:
+    submit: 提交
+    edit: 编辑
+    delete: 删除
+    show: 详细信息
+    actions: 操作
+
+  simple_form:
+      "yes": '是'
+      "no": '否'
+      required:
+        text: '必填'
+        mark: '*'
+      error_notification:
+            default_message: "错误信息如下:"
+      labels:
+        user:
+          email: 电子邮件
+          password: 密码
+          password_confirmation: 确认密码
+          name: 姓名
+          nick: 昵称
+          birth: 生日
+          address: 地址
+          phone: 电话
+        app:
+          name: 应用名
+          access_key: "Access Key"
+          secret_key: "Secret Key"
+          permission_level: "授权等级"
+          enable: "可用？"
 
