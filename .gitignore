@@ -16,4 +16,5 @@
 /tmp
 /.idea
 /db/*.sqlite3
+/public/assets/
 Gemfile.lock
