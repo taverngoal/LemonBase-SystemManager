@@ -9,18 +9,33 @@
   </header>
   <section class="homepage-header">
     <div class="wrapper-full container">
-      <h1 style="font-family: 'Raleway', serif;">Yes! Wonderful Lem<i class="fa fa-lemon-o"></i>ners, Creative Team!</h1>
+      <h1 style="font-family: 'Raleway', serif;">Yes! Wonderful Lem<i class="fa fa-lemon-o"></i>ners, Creative Team!
+      </h1>
+
     </div>
     <div class="announcement text-center">
-      <i class="fa fa-users"></i> Just Do IT!
+      <i class="fa fa-users"></i> Join us!
     </div>
   </section>
   <section class="homepage-panel">
     <div class="container">
+      <div class="slider-wrapper theme-default col-sm-10 col-sm-offset-1">
+        <div id="slider" class="nivoSlider">
+          <img src="<%= asset_path('1.jpg') %>" data-thumb="<%= asset_path('1.jpg') %>" alt=""/>
+          <img src="<%= asset_path('2.jpg') %>" data-thumb="<%= asset_path('2.jpg') %>" alt="" title="Test Title"/>
+          <img src="<%= asset_path('3.jpg') %>" data-thumb="<%= asset_path('3.jpg') %>" alt="" data-transition="slideInLeft"/>
+          <img src="<%= asset_path('4.jpg') %>" data-thumb="<%= asset_path('4.jpg') %>" alt="" title="#htmlcaption"/>
+        </div>
+        <div id="htmlcaption" class="nivo-html-caption">
+          <strong>This</strong><a href="#"></a>.
+        </div>
+      </div>
     </div>
-  </section>
-  <section class="homepage-panel">
-    <div class="container"></div>
   </section>
   <footer></footer>
 </div>
+<script type="text/javascript">
+    $(window).load(function () {
+        $('#slider').nivoSlider();
+    });
+</script>

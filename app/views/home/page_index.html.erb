@@ -1,13 +1,18 @@
-<figure class="effeckt-caption" data-effeckt-type="revolving-door-bottom">
-  <img src="http://placehold.it/300x200" alt="">
-  <figcaption>
-    <div class="effeckt-figcaption-wrap">
-      <h3>Revolving Door Inverse</h3>
-      <p>Lorem ipsum dolar.</p>
+<div id="wrapper">
+  <div class="slider-wrapper theme-default">
+    <div id="slider" class="nivoSlider">
+      <img src="/assets/1.jpg" data-thumb="/assets/1.jpg" alt=""/>
+      <a href="http://dev7studios.com"><img src="/assets/2.jpg" data-thumb="/assets/2.jpg" alt="" title="This is an example of a caption"/></a>
+      <img src="/assets/3.jpg" data-thumb="/assets/3.jpg" alt="" data-transition="slideInLeft"/>
+      <img src="/assets/4.jpg" data-thumb="/assets/4.jpg" alt="" title="#htmlcaption"/>
     </div>
-  </figcaption>
-</figure>
-<div class=""></div>
-<button class="effeckt-button" data-effeckt-type="3d-rotate-success" data-effeckt-message="It Worked!">
-  <span class="effeckt-button-label">3D Success</span>
-</button>
+    <div id="htmlcaption" class="nivo-html-caption">
+      <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $(window).load(function () {
+        $('#slider').nivoSlider();
+    });
+</script>
