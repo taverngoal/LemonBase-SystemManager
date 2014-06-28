@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <title>LemonBase-Systemmanager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
   <script src="http://lib.sinaapp.com/js/bootstrap/latest/js/bootstrap.min.js"></script>
@@ -15,7 +16,14 @@
   <div class="container">
     <section class="row">
       <div class="col-sm-2 sider">
-        <div style="height: 200px; font-size: 150px; margin:0 0 0px 20px; color:#FFCC00 "><i class="fa fa-lemon-o"></i>
+        <div class="visible-lg-block" style="height: 200px; font-size: 150px; margin:0 0 0px 20px; color:#FFCC00 ">
+          <i class="fa fa-lemon-o"></i>
+        </div>
+        <div class="visible-md-block" style="height: 200px; font-size: 130px; margin:0px 0 0 20px; padding-top:20px; color:#FFCC00 ">
+          <i class="fa fa-lemon-o"></i>
+        </div>
+        <div class="visible-sm-block" style="height: 200px; font-size: 90px; margin:0 0 0px 20px;padding-top:60px; color:#FFCC00 ">
+          <i class="fa fa-lemon-o"></i>
         </div>
         <ul class="nav nav-pills nav-stacked">
           <li class="<%= 'active' if controller_name == 'admin' and action_name == 'index' %>">
