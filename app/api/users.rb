@@ -1,7 +1,14 @@
-class UsersAPI < Grape::API
+class BasicAPI < Grape::API
   format :json
-  desc 'Returns your public timeline.'
-  get do
-    User.all()
+
+  resource :users do
+    get do
+      User.all().select(:email, :name, :nick)
+    end
+
+
+    post do
+
+    end
   end
 end

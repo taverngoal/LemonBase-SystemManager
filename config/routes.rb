@@ -1,6 +1,9 @@
 require './app/api/users'
 Rails.application.routes.draw do
-  mount UsersAPI => '/api/users'
+  mount BasicAPI => '/api/basic'
+
+
+
   get 'admin/index'
 
   get 'home/index'
@@ -18,6 +21,8 @@ Rails.application.routes.draw do
     resources :apps
     resources :users
   end
+
+  resources :apps
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
