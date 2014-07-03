@@ -1,7 +1,6 @@
-require './app/api/users'
+require './app/api/basic'
 Rails.application.routes.draw do
   mount BasicAPI => '/api/basic'
-
 
 
   get 'admin/index'
@@ -20,6 +19,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :apps
     resources :users
+
+    post :sign_in
   end
 
   resources :apps
