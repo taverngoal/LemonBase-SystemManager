@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :users
 
     post :sign_in
+    get :sign_out
   end
 
   resources :apps

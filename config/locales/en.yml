@@ -20,9 +20,57 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: Hello world
   nav:
     user_label: Users
     app_label: Applications
     home_label: Home
+
+  breadcrumbs:
+    admin:
+        base:
+          index: Index
+        apps:
+          controller: Apps
+          index: List
+          new: New
+          edit: Edit
+          show: Show
+        users:
+          controller: Users
+          index: List
+          new: New
+          edit: Edit
+          show: Show
+    buttons:
+      submit: Submit
+      edit: Edit
+      delete: Del
+      show: Show
+      actions: Actions
+
+    simple_form:
+        "yes": Yes
+        "no": No
+        required:
+          text: Required
+          mark: '*'
+        error_notification:
+              default_message: "Errors:"
+        labels:
+          user:
+            email: Email
+            password: Password
+            password_confirmation: 'Password Confirm'
+            name: Name
+            nick: Nick
+            birth: BirthDay
+            address: Address
+            phone: Phone
+          app:
+            name: AppName
+            access_key: "Access Key"
+            secret_key: "Secret Key"
+            permission_level: "PermissionLevel"
+            enable: "Enable？"
 

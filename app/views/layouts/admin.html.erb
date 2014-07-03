@@ -16,41 +16,43 @@
   <div class="container">
     <section class="row">
       <div class="col-sm-2 sider">
-        <div class="visible-lg-block" style="height: 200px; font-size: 150px; margin:0 0 0px 20px; color:#FFCC00 ">
+        <div class="visible-lg-block admin_logo" style="font-size: 150px; ">
           <i class="fa fa-lemon-o"></i>
         </div>
-        <div class="visible-md-block" style="height: 200px; font-size: 130px; margin:0px 0 0 20px; padding-top:20px; color:#FFCC00 ">
+        <div class="visible-md-block admin_logo" style="font-size: 130px;padding-top:20px; ">
           <i class="fa fa-lemon-o"></i>
         </div>
-        <div class="visible-sm-block" style="height: 200px; font-size: 90px; margin:0 0 0px 20px;padding-top:60px; color:#FFCC00 ">
+        <div class="visible-sm-block admin_logo" style=" font-size: 90px; padding-top:60px; ">
           <i class="fa fa-lemon-o"></i>
         </div>
         <ul class="nav nav-pills nav-stacked">
           <li class="<%= 'active' if controller_name == 'admin' and action_name == 'index' %>">
             <a href="<%= url_for controller: '/admin', action: :index %>">
-              <%= t 'nav.home_label' %>
+              <i class="fa fa-home fa-fw"></i> <%= t 'nav.home_label' %>
             </a>
           </li>
           <li class="<%= 'active' if controller_name == 'apps' %>">
             <a href="<%= url_for controller: 'admin/apps', action: :index %>">
               <span class="badge pull-right"><%= App.count %></span>
-              <%= t 'nav.app_label' %>
+              <i class="fa fa-cubes fa-fw"></i> <%= t 'nav.app_label' %>
             </a>
           </li>
           <li class="<%= 'active' if controller_name == 'users' %>">
             <a href="<%= url_for controller: 'admin/users', action: :index %>">
               <span class="badge pull-right"><%= User.count %></span>
-              <%= t 'nav.user_label' %>
+              <i class="fa fa-users fa-fw"></i> <%= t 'nav.user_label' %>
             </a>
           </li>
           <li>
             <a href="<%= root_path %>">
-              <%= t 'nav.back_to_front' %>
+              <i class="fa fa-reply fa-fw"></i> <%= t 'nav.back_to_front' %>
             </a>
           </li>
         </ul>
       </div>
       <div class="col-sm-10 content">
+        <p class="text-right small"><i>Welcome!</i> <i class="fa-user fa fa-lg "></i> <%= current_user.name %>
+          <a class="fa fa-sign-out fa-lg" href="<%= url_for admin_sign_out_path %>"></a></p>
         <%= render_breadcrumbs %>
         <%= yield %>
       </div>

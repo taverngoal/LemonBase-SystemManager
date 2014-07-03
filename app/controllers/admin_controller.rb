@@ -12,4 +12,9 @@ class AdminController < ApplicationController
       redirect_to home_login_path
     end
   end
+
+  def sign_out
+    logout
+    redirect_to home_login_path
+  end
 end
