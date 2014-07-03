@@ -29,6 +29,9 @@ module LemonBaseSystemmanager
     config.i18n.default_locale = :cn
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+
+    platform = RUBY_PLATFORM.match(/(linux|darwin)/)[0].to_sym
+    Bundler.require(platform)
     # config.autoload_paths += Dir[Rails.root.join('app', 'api', '*').to_s]
 
     # platform = RUBY_PLATFORM.match(/(linux|darwin)/)[0].to_sym

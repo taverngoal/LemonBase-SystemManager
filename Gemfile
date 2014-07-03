@@ -30,8 +30,10 @@ gem 'simple_form'
 gem 'sorcery'
 gem 'grape'
 
+
 # group :linux do
 #   gem 'therubyracer'
+#   gem 'mysql2'
 # end
 
 # Use ActiveModel has_secure_password
