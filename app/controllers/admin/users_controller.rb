@@ -46,10 +46,11 @@ class Admin::UsersController < Admin::BaseController
   # PATCH/PUT /admin/users/1.json
   def update
     respond_to do |format|
-      if @admin_user.update(admin_user_params)
+      if @admin_user.update_attributes(admin_user_params)
         format.html { redirect_to [:admin, @admin_user], notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: [:admin, @admin_user] }
       else
+        flash[:error] =  @admin_user.errors.as_json
         format.html { render :edit }
         format.json { render json: @admin_user.errors, status: :unprocessable_entity }
       end

@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   end
 
   def sign_in
-    if @user = login(params[:email], params[:password])
+    if @user = login(params[:email], params[:password], params[:remember])
       redirect_back_or_to(admin_index_path, notice: 'Login successful')
     else
       flash[:alert] = 'Login failed'
