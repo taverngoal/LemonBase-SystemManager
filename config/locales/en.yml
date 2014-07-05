@@ -26,6 +26,14 @@ en:
     app_label: Applications
     home_label: Home
 
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              blank: '不能为空'
+
   breadcrumbs:
     admin:
         base:
