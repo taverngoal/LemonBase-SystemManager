@@ -14,9 +14,9 @@
 ActiveRecord::Schema.define(version: 20140708174016) do
 
   create_table "account_details", force: true do |t|
-    t.string   "title"
-    t.decimal  "sum"
-    t.integer  "type"
+    t.string   "title",                    null: false
+    t.decimal  "sum",        default: 0.0, null: false
+    t.integer  "type",       default: 1,   null: false
     t.integer  "user_id"
     t.string   "memo"
     t.string   "purpose"
@@ -29,11 +29,11 @@ ActiveRecord::Schema.define(version: 20140708174016) do
   add_index "account_details", ["user_id"], name: "index_account_details_on_user_id"
 
   create_table "accounts", force: true do |t|
-    t.string   "title"
-    t.decimal  "amount",     default: 0.0
-    t.integer  "creator"
-    t.integer  "officer"
-    t.boolean  "is_public"
+    t.string   "title",                      null: false
+    t.decimal  "amount",     default: 0.0,   null: false
+    t.integer  "creator",                    null: false
+    t.integer  "officer",                    null: false
+    t.boolean  "is_public",  default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
