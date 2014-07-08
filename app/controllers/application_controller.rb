@@ -18,4 +18,7 @@ class ApplicationController < ActionController::Base
     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
 
+  def not_authenticated
+    redirect_to home_login_path, alert: "Please login first"
+  end
 end
