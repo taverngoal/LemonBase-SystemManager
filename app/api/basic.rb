@@ -3,7 +3,7 @@ class BasicAPI < Grape::API
 
   resource :users do
     get do
-      User.all().select(:email, :name, :nick, :birth, :address, :phone)
+      User.all().select(:email, :name, :nick, :birth, :address, :phone, :id)
     end
 
 
