@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625161340) do
+ActiveRecord::Schema.define(version: 20140708174016) do
+
+  create_table "account_details", force: true do |t|
+    t.string   "title"
+    t.decimal  "sum"
+    t.integer  "type"
+    t.integer  "user_id"
+    t.string   "memo"
+    t.string   "purpose"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "account_details", ["account_id"], name: "index_account_details_on_account_id"
+  add_index "account_details", ["user_id"], name: "index_account_details_on_user_id"
+
+  create_table "accounts", force: true do |t|
+    t.string   "title"
+    t.decimal  "amount",     default: 0.0
+    t.integer  "creator"
+    t.integer  "officer"
+    t.boolean  "is_public"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "app_logs", force: true do |t|
     t.integer "app_id"
@@ -34,9 +59,9 @@ ActiveRecord::Schema.define(version: 20140625161340) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                                      null: false
-    t.string   "crypted_password",                           null: false
-    t.string   "salt",                                       null: false
+    t.string   "email",                                                      null: false
+    t.string   "crypted_password",                                           null: false
+    t.string   "salt",                                                       null: false
     t.string   "name"
     t.string   "nick"
     t.datetime "birth"
@@ -49,6 +74,8 @@ ActiveRecord::Schema.define(version: 20140625161340) do
     t.string   "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
+    t.string   "photo_url"
+    t.boolean  "admin",                                      default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
