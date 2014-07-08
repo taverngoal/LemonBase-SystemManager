@@ -4,25 +4,32 @@
   </div>
   <div class="col-sm-6 col-sm-offset-3">
     <%= form_tag(url_for(home_sign_up_path), method: :post) do -%>
-        <% if flash[:error]
-             flash[:error].each do |k, v| %>
-                <div class="alert alert-danger" role="alert">
-                  <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <%= v %>
-                </div>
-            <% end end %>
-        <div class="form-group">
-          <label for="email">Email</label>
+        <div class="form-group <%= 'has-error' if @errors[:email] if @errors %>">
+          <label for="email" class="control-label">Email</label>
           <input id="email" class="form-control input-lg" name="user[email]">
+          <% if @errors %>
+              <div class="error">
+                <%= @errors[:email][0] if  @errors[:email] %>
+              </div>
+          <% end %>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
+        <div class="form-group <%= 'has-error' if @errors[:password] if @errors %>">
+          <label for="password" class="control-label">Password</label>
           <input id="password" class="form-control input-lg" type="password" name="user[password]">
+          <% if @errors %>
+              <div class="error">
+                <%= @errors[:password][0] if  @errors[:password] %>
+              </div>
+          <% end %>
         </div>
-        <div class="form-group">
-          <label for="password_confirmation">Password Confirmation</label>
+        <div class="form-group <%= 'has-error' if @errors[:password_confirmation] if @errors %>">
+          <label for="password_confirmation" class="control-label">Password Confirmation</label>
           <input id="password_confirmation" class="form-control input-lg" type="password" name="user[password_confirmation]">
+          <% if @errors %>
+              <div class="error">
+                <%= @errors[:password_confirmation][0] if  @errors[:password_confirmation] %>
+              </div>
+          <% end %>
         </div>
         <div class="form-group">
           <%= link_to 'Login', home_login_path, class: 'btn btn-warning btn-lg col-sm-3' %>

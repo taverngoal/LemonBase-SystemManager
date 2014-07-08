@@ -144,10 +144,21 @@ SimpleForm.setup do |config|
   # config.input_class = nil
 
 
-  config.wrappers :horizontal_input, :tag => 'div', :class => 'form-group', :error_class => 'error' do |b|
+  config.wrappers :horizontal_input, :tag => 'div', :class => 'form-group', :error_class => 'has-error has-feedback' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
     b.use :input, wrap_with: {tag: 'div', class: 'col-sm-10'}
+    b.use :error, wrap_with: {tag: :div, class: 'col-sm-10 col-sm-offset-2 error'}
+  end
+
+  config.wrappers :basic_input, tag: 'div', class: 'form-group', error_class: 'has-error has-feedback' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.wrapper tag: :div, class: 'form-group' do |c|
+      c.use :label
+      c.use :input, class: 'form-control input-lg'
+    end
+    b.use :error, wrap_with: {tag: :div, class: 'col-sm-10 col-sm-offset-2 error'}
   end
 end

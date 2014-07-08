@@ -21,7 +21,7 @@ class HomeController < ApplicationController
       if @user.save
         format.html { redirect_to home_login_path, notice: 'Registration was successfully .' }
       else
-        flash[:error] = @user.errors.as_json
+        @errors = @user.errors.as_json
         p @user.errors
         format.html { render :register }
       end

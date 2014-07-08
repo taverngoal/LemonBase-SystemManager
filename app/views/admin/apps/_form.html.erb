@@ -1,6 +1,4 @@
 <%= simple_form_for([:admin, @admin_app], html: {class: 'form-horizontal', role: 'form'}) do |f| %>
-    <%= flash[:error] %>
-
     <%= f.input :name, :wrapper => :horizontal_input, label_html: {class: 'col-sm-2'}, input_html: {class: 'form-control'} %>
     <%= f.input :access_key, :wrapper => :horizontal_input, label_html: {class: 'col-sm-2'}, input_html: {class: 'form-control'} %>
     <%= f.input :secret_key, :wrapper => :horizontal_input, label_html: {class: 'col-sm-2'}, input_html: {class: 'form-control'} %>

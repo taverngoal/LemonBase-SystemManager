@@ -1,9 +1,37 @@
 cn:
+  activerecord:
+    attributes:
+      user:
+        email: "电子邮件"
+        password: "密码"
+        password_confirmation: "确认密码"
+      app:
+        name: "应用名"
+        permission_level: "授权等级"
+    errors:
+      format: '%{attribute} %{message}'
+      messages:
+        blank: '%{attribute}不能为空'
+        empty: '%{attribute}不能为空字符串'
+        equal_to: '%{attribute}验证失败'
+        taken: '%{attribute}已经存在'
+        confirmation: '请确认%{attribute}'
+        too_short: '%{attribute}太短'
+      full_messages:
+        format: "%{attribute} %{message}"
+      template:
+        header:
+          one:   "在提交%{model}时，有一个错误导致失败"
+          other: "在提交%{model}时，有%{count}个错误导致失败"
+        body:    "错误信息请参见以下:"
+
+
   nav:
     user_label: 用户
     app_label: 应用
     home_label: "首页"
     back_to_front: "返回前端"
+
   breadcrumbs:
     admin:
       base:
