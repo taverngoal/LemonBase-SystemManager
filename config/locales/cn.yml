@@ -8,6 +8,12 @@ cn:
       app:
         name: "应用名"
         permission_level: "授权等级"
+      account:
+        title: 账目名
+        is_public: 公开账目
+        amount: 金额
+        creator: "创建人"
+        officer: "负责人"
     errors:
       format: '%{attribute} %{message}'
       messages:
@@ -31,7 +37,7 @@ cn:
     app_label: 应用
     home_label: "首页"
     back_to_front: "返回前端"
-
+    account_label: "账目"
   breadcrumbs:
     admin:
       base:
@@ -48,6 +54,11 @@ cn:
         new: 添加
         edit: 修改
         show: 详细信息
+      accounts:
+        index: "账目"
+        new: "新建"
+        edit: "修改"
+        show: "详细信息"
   buttons:
     submit: 提交
     edit: 编辑
@@ -73,10 +84,15 @@ cn:
           birth: 生日
           address: 地址
           phone: 电话
+          admin: "管理员"
         app:
           name: 应用名
           access_key: "Access Key"
           secret_key: "Secret Key"
           permission_level: "授权等级"
           enable: "可用？"
+        account:
+          title: 账目名
+          amount: 金额
+          is_public: 公开此账目
 

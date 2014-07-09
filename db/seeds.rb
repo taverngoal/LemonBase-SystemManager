@@ -6,5 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(email: 'windack@qq.com', password: '19901001', nick: 'tavern', password_confirmation: '19901001', name: 'Tavern')
+User.create(email: 'windack@qq.com', password: '19901001', nick: 'tavern', password_confirmation: '19901001', name: 'Tavern', admin: true)
 App.create(name: :'LemonBase', permission_level: 100, enable: true)

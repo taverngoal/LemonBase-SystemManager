@@ -34,7 +34,13 @@
 
 
   g.column name: t('buttons.actions') do |app|
-
-    link_to(t('buttons.delete'), {action: :destroy, id: app.id}, method: :delete, data: {confirm: '确定删除?'})
+    link = ''
+    if can? :update, app
+      link+=link_to(t('buttons.edit'), edit_admin_user_path(app))
+    end
+    if can? :destroy, app
+      link+=link_to(t('buttons.delete'), {action: :destroy, id: app.id}, method: :delete, data: {confirm: '确定删除?'})
+    end
+    raw link
   end
 end -%>

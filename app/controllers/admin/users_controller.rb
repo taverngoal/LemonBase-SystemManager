@@ -1,4 +1,6 @@
 class Admin::UsersController < Admin::BaseController
+  load_and_authorize_resource
+  skip_load_resource :only => [:create]
   add_breadcrumb :controller, action: :index
   before_action :set_admin_user, only: [:show, :edit, :update, :destroy]
 
@@ -30,7 +32,6 @@ class Admin::UsersController < Admin::BaseController
   # POST /admin/users.json
   def create
     @admin_user = User.new(admin_user_params)
-
     respond_to do |format|
       if @admin_user.save
         format.html { redirect_to [:admin, @admin_user], notice: 'User was successfully created.' }

@@ -29,6 +29,7 @@ gem 'wice_grid'
 gem 'simple_form'
 gem 'sorcery'
 gem 'grape'
+gem 'cancan'
 
 
 # group :linux do

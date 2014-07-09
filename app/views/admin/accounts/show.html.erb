@@ -1,0 +1,22 @@
+<%= render 'nav' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t 'activerecord.attributes.account.title' %>:</strong>
+  <%= @admin_account.title %>
+</p>
+
+<p>
+  <strong><%= t 'activerecord.attributes.account.amount' %>:</strong>
+  <%= @admin_account.amount %>
+</p>
+
+<p>
+  <strong><%= t 'activerecord.attributes.account.is_public' %>:</strong>
+  <%= @admin_account.is_public %>
+</p>
+
+<p>
+  <strong><%= t 'activerecord.attributes.account.creator' %>:</strong>
+  <%= @admin_account.creator.name %>
+</p>

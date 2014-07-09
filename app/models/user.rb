@@ -8,4 +8,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :email, format: {with: /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/, :multiline => true, message: '邮件格式不对'}
+
+  has_many :created_accounts, class_name: 'Account', foreign_key: :creator
+  has_many :managed_accounts, class_name: 'Account', foreign_key: :officer
 end

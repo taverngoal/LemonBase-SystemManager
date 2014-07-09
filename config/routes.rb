@@ -21,12 +21,12 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :apps
     resources :users
+    resources :accounts
 
     post :sign_in
     get :sign_out
   end
 
-  resources :apps
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

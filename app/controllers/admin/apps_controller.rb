@@ -1,4 +1,6 @@
 class Admin::AppsController < Admin::BaseController
+  load_and_authorize_resource
+  skip_load_resource :only => [:create]
   add_breadcrumb :controller, action: :index
   before_action :set_admin_app, only: [:show, :edit, :update, :destroy]
 

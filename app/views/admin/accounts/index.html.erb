@@ -1,0 +1,38 @@
+<%= render 'nav' %>
+
+<%= grid(@admin_accounts, show_filters: :no) do |g|
+
+  g.column name: 'ID' do |app|
+    app.id
+  end
+
+  g.column name: t('activerecord.attributes.account.title') do |app|
+    link_to(app.title, admin_account_path(app))
+  end
+
+
+  g.column name: t('activerecord.attributes.account.amount') do |app|
+    app.amount
+  end
+
+
+  g.column name: t('activerecord.attributes.account.is_public') do |app|
+    app.is_public ? '公开' : '私有'
+  end
+
+  g.column name: t('activerecord.attributes.account.creator') do |app|
+    app.creator.name if app.creator
+  end
+
+
+  g.column name: t('buttons.actions') do |app|
+    link = ''
+    if can? :update, app
+      link+=link_to(t('buttons.edit'), edit_admin_account_path(app))
+    end
+    if can? :destroy, app
+      link+= link_to(t('buttons.delete'), {action: :destroy, id: app.id}, method: :delete, data: {confirm: '确定删除?'})
+    end
+    raw link
+  end
+end -%>
