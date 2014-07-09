@@ -28,7 +28,7 @@
   g.column name: t('buttons.actions') do |app|
     link = ''
     if can? :update, app
-      link+=link_to(t('buttons.edit'), edit_admin_account_path(app))
+      link+=link_to(t('buttons.edit'), edit_admin_account_path(app))+ ' '
     end
     if can? :destroy, app
       link+= link_to(t('buttons.delete'), {action: :destroy, id: app.id}, method: :delete, data: {confirm: '确定删除?'})
