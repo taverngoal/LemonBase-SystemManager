@@ -26,3 +26,4 @@ production:
   host: localhost
   username: root
   password: 901001
+  encoding: utf8
