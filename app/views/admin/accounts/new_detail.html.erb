@@ -1,0 +1,12 @@
+<%= render 'nav' %>
+
+<%= simple_form_for([:admin, @account_detail], html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+
+    <%= f.input :is_public %>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.button :submit, t('buttons.submit'), class: 'btn-default' %>
+      </div>
+    </div>
+<% end %>

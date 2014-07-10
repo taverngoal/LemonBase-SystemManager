@@ -69,6 +69,20 @@
           </a>
           <a class="fa fa-sign-out fa-lg" href="<%= url_for admin_sign_out_path %>"></a></p>
         <%= render_breadcrumbs %>
+        <% if flash[:notice] %>
+            <div class="alert alert-info" role="alert">
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <a href="#" class="alert-link"><%= flash[:notice] %></a>
+            </div>
+        <% end %>
+        <% if flash[:alert] %>
+            <div class="alert alert-danger" role="alert">
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <a href="#" class="alert-link"><%= flash[:alert] %></a>
+            </div>
+        <% end %>
         <%= yield %>
       </div>
     </section>

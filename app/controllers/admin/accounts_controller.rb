@@ -1,26 +1,40 @@
 class Admin::AccountsController < Admin::BaseController
   load_and_authorize_resource
   skip_load_resource :only => [:create]
+  add_breadcrumb :controller, action: :index
   before_action :set_admin_account, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/accounts
   # GET /admin/accounts.json
   def index
+    add_breadcrumb :index, :index
     @admin_accounts =initialize_grid(Account.where('is_public = ? OR officer = ?', true, current_user.id), per_page: 20)
   end
 
   # GET /admin/accounts/1
   # GET /admin/accounts/1.json
   def show
+    add_breadcrumb :show, :show
+    @details = initialize_grid(@admin_account.account_details.order('created_at DESC'), per_page: 20)
   end
 
   # GET /admin/accounts/new
   def new
+    add_breadcrumb :new, :new
     @admin_account = Account.new
   end
 
   # GET /admin/accounts/1/edit
   def edit
+    add_breadcrumb :edit, :edit
+  end
+
+  def new_detail
+    @account_detail = AccountDetail.new
+  end
+
+  def create_detail
+
   end
 
   # POST /admin/accounts

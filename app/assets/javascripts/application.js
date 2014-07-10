@@ -15,4 +15,5 @@
 // require twitter/bootstrap
 //= require wice_grid
 //= require turbolinks
+//= require Chart.min.js
 //= require_tree .

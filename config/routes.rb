@@ -1,13 +1,10 @@
 require './app/api/basic'
 Rails.application.routes.draw do
+
   mount BasicAPI => '/api/basic'
-
-
   get 'admin/index'
-
   get 'home/index'
   get 'home/page_index'
-
   get 'home/login'
   get 'home/register'
   post 'home/sign_up'
@@ -21,7 +18,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :apps
     resources :users
-    resources :accounts
+    resources :accounts do
+      resources :account_details
+    end
 
     post :sign_in
     get :sign_out

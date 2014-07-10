@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 20140708174016) do
   create_table "account_details", force: true do |t|
     t.string   "title",                    null: false
     t.decimal  "sum",        default: 0.0, null: false
-    t.integer  "type",       default: 1,   null: false
     t.integer  "user_id"
     t.string   "memo"
     t.string   "purpose"
     t.integer  "account_id"
+    t.decimal  "amount",     default: 0.0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

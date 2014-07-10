@@ -25,7 +25,7 @@ class Admin::AppsController < Admin::BaseController
 
   # GET /admin/apps/1/edit
   def edit
-    add_breadcrumb :edit, :new
+    add_breadcrumb :edit, :edit
   end
 
   # POST /admin/apps

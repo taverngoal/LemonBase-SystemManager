@@ -1,0 +1,14 @@
+<%= simple_form_for([:admin, :account, @admin_account_detail], html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+
+    <%= f.input :title, :wrapper => :horizontal_input, label_html: {class: 'col-sm-2'}, input_html: {class: 'form-control'} %>
+    <%= f.input :sum, :wrapper => :horizontal_input, label_html: {class: 'col-sm-2'}, input_html: {class: 'form-control', disabled: ('disabled' if @admin_account_detail.id)} %>
+    <%= f.input :memo, as: :text, :wrapper => :horizontal_input, label_html: {class: 'col-sm-2'}, input_html: {class: 'form-control'} %>
+    <%= f.input :purpose, as: :text, :wrapper => :horizontal_input, label_html: {class: 'col-sm-2'}, input_html: {class: 'form-control'} %>
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.button :submit, t('buttons.submit'), class: 'btn-default' %>
+      </div>
+    </div>
+<% end %>

@@ -55,8 +55,16 @@ cn:
         edit: 修改
         show: 详细信息
       accounts:
-        index: "账目"
-        new: "新建"
+        controller: "账目"
+        index: "列表"
+        new: "添加"
+        edit: "修改"
+        show: "详细信息"
+        new_detail: "添加明细"
+      account_details:
+        controller: "账目明细"
+        index: "列表"
+        new: "添加"
         edit: "修改"
         show: "详细信息"
   buttons:
@@ -95,4 +103,13 @@ cn:
           title: 账目名
           amount: 金额
           is_public: 公开此账目
+
+        account_detail:
+          title: "名称"
+          sum: "金额"
+          type: "记录类型"
+          memo: "备注"
+          purpose: "用途"
+          user: "记录人"
+          account: "所属账目"
 

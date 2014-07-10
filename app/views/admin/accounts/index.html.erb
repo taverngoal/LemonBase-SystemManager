@@ -27,6 +27,9 @@
 
   g.column name: t('buttons.actions') do |app|
     link = ''
+    if can? :read, app
+      link += "<a href='#{url_for controller: 'admin/account_details', action: 'index', account_id: app.id}'>#{t 'buttons.show'}</a>" + ' '
+    end
     if can? :update, app
       link+=link_to(t('buttons.edit'), edit_admin_account_path(app))+ ' '
     end

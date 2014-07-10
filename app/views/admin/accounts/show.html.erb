@@ -1,5 +1,4 @@
 <%= render 'nav' %>
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong><%= t 'activerecord.attributes.account.title' %>:</strong>
@@ -19,4 +18,8 @@
 <p>
   <strong><%= t 'activerecord.attributes.account.creator' %>:</strong>
   <%= @admin_account.creator.name %>
+</p>
+<p>
+  <strong><%= t 'activerecord.attributes.account.officer' %>:</strong>
+  <%= @admin_account.officer.name %>
 </p>
