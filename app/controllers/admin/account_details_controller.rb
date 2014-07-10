@@ -7,12 +7,14 @@ class Admin::AccountDetailsController < Admin::BaseController
   # GET /admin/account_details.json
   def index
     add_breadcrumb :index, :index
-    @admin_account_details = AccountDetail.where(:account => @admin_account)
-    @last_details = []
-    @last_amounts = []
-    @admin_account.account_details.select(:sum, :amount).last(6).each do |i|
+    @admin_account_details = initialize_grid(AccountDetail.where(:account => @admin_account).order('created_at DESC'), per_page: 20)
+    @last_details = [] # sum的集合
+    @last_amounts = [] # 金额变化集合
+    @last_records = [] # 最后的记录，时间集合
+    @admin_account.account_details.select(:sum, :amount, :created_at).last(10).each do |i|
       @last_details << i.sum
       @last_amounts << i.amount
+      @last_records << i.created_at.strftime('%m月%d日 %H:%M')
     end
 
   end

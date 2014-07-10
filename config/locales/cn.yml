@@ -14,6 +14,14 @@ cn:
         amount: 金额
         creator: "创建人"
         officer: "负责人"
+      account_detail:
+        title: "标题"
+        sum: "入账金额"
+        memo: "备注"
+        purpose: "用途"
+        user: "记录者"
+        amount: "实时金额"
+        created_at: "入账日期"
     errors:
       format: '%{attribute} %{message}'
       messages:

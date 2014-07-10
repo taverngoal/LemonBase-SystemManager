@@ -1,5 +1,10 @@
 <%= render 'nav' %>
 
+<div class="page-header yahei" style="margin-top: 0">
+  <h1><%= @admin_account.title %>
+    <small>负责人：<%= @admin_account.officer.name if @admin_account.officer %></small>
+    <span class="label label-warning pull-right">¥<%= @admin_account.amount %></span></h1>
+</div>
 
 <div>
   <canvas id="canvas" height="200" width="600"></canvas>
@@ -9,10 +14,10 @@
         return Math.round(Math.random() * 50)
     };
     var lineChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: <%= raw @last_records.to_json %>,
         datasets: [
             {
-                label: "My First dataset",
+                label: "入账金额",
                 fillColor: "rgba(220,220,220,0.2)",
                 strokeColor: "rgba(220,220,220,1)",
                 pointColor: "rgba(220,220,220,1)",
@@ -22,7 +27,7 @@
                 data: <%=  raw @last_details.to_json %>
             },
             {
-                label: "My Second dataset",
+                label: "总金额",
                 fillColor: "rgba(151,187,205,0.2)",
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
@@ -41,31 +46,39 @@
         });
     })
 </script>
-<table>
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>Sum</th>
-    <th>User</th>
-    <th>Memo</th>
-    <th>Purpose</th>
-    <th>Account</th>
-    <th>Amount</th>
-  </tr>
-  </thead>
 
-  <tbody>
-  <% @admin_account_details.each do |admin_account_detail| %>
-      <tr>
-        <td><%= admin_account_detail.title %></td>
-        <td><%= admin_account_detail.sum %></td>
-        <td><%= admin_account_detail.user.name %></td>
-        <td><%= admin_account_detail.memo %></td>
-        <td><%= admin_account_detail.purpose %></td>
-        <td><%= admin_account_detail.account.title %></td>
-        <td><%= admin_account_detail.amount %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
 <br>
+
+<%= grid(@admin_account_details, show_filters: :no) do |g|
+
+  g.column name: 'ID' do |app|
+    app.id
+  end
+
+  g.column name: t('activerecord.attributes.account_detail.title') do |app|
+    app.title
+  end
+
+  g.column do |detail|
+  end
+
+  g.column name: t('activerecord.attributes.account_detail.sum') do |app|
+
+    raw "<span class=\"label #{span_sum_class app.sum}\">#{app.sum}</span>"
+  end
+  g.column name: t('activerecord.attributes.account_detail.amount') do |app|
+    raw "<span class=\"label label-warning\">#{'¥'+ app.amount.to_s}</span>"
+  end
+
+
+  g.column name: t('activerecord.attributes.account_detail.user') do |app|
+    app.user.name if app.user
+  end
+
+  g.column name: t('activerecord.attributes.account_detail.purpose') do |app|
+    app.purpose
+  end
+  g.column name: t('activerecord.attributes.account_detail.created_at') do |app|
+    app.created_at.strftime('%m月%d日 %H:%M')
+  end
+end -%>
