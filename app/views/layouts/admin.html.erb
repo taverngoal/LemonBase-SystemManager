@@ -15,53 +15,55 @@
   <!--<header></header>-->
   <div class="container">
     <section class="row">
-      <div class="col-sm-2 sider">
-        <div class="visible-lg-block admin_logo" style="font-size: 150px; ">
-          <i class="fa fa-lemon-o"></i>
-        </div>
-        <div class="visible-md-block admin_logo" style="font-size: 130px;padding-top:20px; ">
-          <i class="fa fa-lemon-o"></i>
-        </div>
-        <div class="visible-sm-block admin_logo" style=" font-size: 90px; padding-top:60px; ">
-          <i class="fa fa-lemon-o"></i>
-        </div>
-        <ul class="nav nav-pills nav-stacked">
-          <li class="<%= 'active' if controller_name == 'admin' and action_name == 'index' %>">
-            <a href="<%= url_for controller: '/admin', action: :index %>">
-              <i class="fa fa-home fa-fw"></i> <%= t 'nav.home_label' %>
-            </a>
-          </li>
-          <% if can? :read, App %>
-              <li class="<%= 'active' if controller_name == 'apps' %>">
-                <a href="<%= url_for controller: 'admin/apps', action: :index %>">
-                  <span class="badge pull-right"><%= App.count %></span>
-                  <i class="fa fa-cubes fa-fw"></i> <%= t 'nav.app_label' %>
-                </a>
-              </li>
-          <% end %>
+      <div class="col-sm-2 ">
+        <div class="sider">
+          <div class="visible-lg-block admin_logo" style="font-size: 150px; ">
+            <i class="fa fa-lemon-o"></i>
+          </div>
+          <div class="visible-md-block admin_logo" style="font-size: 130px;padding-top:20px; ">
+            <i class="fa fa-lemon-o"></i>
+          </div>
+          <div class="visible-sm-block admin_logo" style=" font-size: 90px; padding-top:60px; ">
+            <i class="fa fa-lemon-o"></i>
+          </div>
+          <ul class="nav nav-pills nav-stacked">
+            <li class="<%= 'active' if controller_name == 'admin' and action_name == 'index' %>">
+              <a href="<%= url_for controller: '/admin', action: :index %>">
+                <i class="fa fa-home fa-fw"></i> <%= t 'nav.home_label' %>
+              </a>
+            </li>
+            <% if can? :read, App %>
+                <li class="<%= 'active' if controller_name == 'apps' %>">
+                  <a href="<%= url_for controller: 'admin/apps', action: :index %>">
+                    <span class="badge pull-right"><%= App.count %></span>
+                    <i class="fa fa-cubes fa-fw"></i> <%= t 'nav.app_label' %>
+                  </a>
+                </li>
+            <% end %>
 
-          <% if can? :read, User %>
-              <li class="<%= 'active' if controller_name == 'users' %>">
-                <a href="<%= url_for controller: 'admin/users', action: :index %>">
-                  <span class="badge pull-right"><%= User.count %></span>
-                  <i class="fa fa-users fa-fw"></i> <%= t 'nav.user_label' %>
-                </a>
-              </li>
-          <% end %>
-          <% if can? :read, Account %>
-              <li class="<%= 'active' if ['accounts','account_details'].include? controller_name %>">
-                <a href="<%= url_for controller: 'admin/accounts', action: :index %>">
-                  <span class="badge pull-right"><%= current_user.managed_accounts.count %></span>
-                  <i class="fa fa-book fa-fw"></i> <%= t 'nav.account_label' %>
-                </a>
-              </li>
-          <% end %>
-          <li>
-            <a href="<%= root_path %>">
-              <i class="fa fa-reply fa-fw"></i> <%= t 'nav.back_to_front' %>
-            </a>
-          </li>
-        </ul>
+            <% if can? :read, User %>
+                <li class="<%= 'active' if controller_name == 'users' %>">
+                  <a href="<%= url_for controller: 'admin/users', action: :index %>">
+                    <span class="badge pull-right"><%= User.count %></span>
+                    <i class="fa fa-users fa-fw"></i> <%= t 'nav.user_label' %>
+                  </a>
+                </li>
+            <% end %>
+            <% if can? :read, Account %>
+                <li class="<%= 'active' if ['accounts', 'account_details'].include? controller_name %>">
+                  <a href="<%= url_for controller: 'admin/accounts', action: :index %>">
+                    <span class="badge pull-right"><%= current_user.managed_accounts.count %></span>
+                    <i class="fa fa-book fa-fw"></i> <%= t 'nav.account_label' %>
+                  </a>
+                </li>
+            <% end %>
+            <li>
+              <a href="<%= root_path %>">
+                <i class="fa fa-reply fa-fw"></i> <%= t 'nav.back_to_front' %>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="col-sm-10 content">
         <p class="text-right small"><i>Welcome!</i>

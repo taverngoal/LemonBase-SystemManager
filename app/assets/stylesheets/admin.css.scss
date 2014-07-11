@@ -3,11 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-#admin_page {  }
+#admin_page {   }
   #admin_page header {  height: 70px; margin-bottom: 20px  }
-  #admin_page .sider .nav-pills > li.active  a{ background-color: #FFCC00 }
-  #admin_page .content { margin-top: 20px }
+  #admin_page .sider {position: fixed }
+    #admin_page .sider .nav-pills > li.active  a{ background-color: #FFCC00 }
+  #admin_page .content { margin-top: 20px}
   #admin_page .admin_logo { height:200px; margin:0 0 0 20px; color:#FFCC00 }
 
 form .error { color: #a94442; font-size: 12px; }
 .yahei { font-family: 'microsoft yahei ui', sans-serif }
+
+@media screen and (max-width: 768px) {
+  #admin_page .sider {position: relative  }
+}

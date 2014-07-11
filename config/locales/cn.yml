@@ -64,15 +64,15 @@ cn:
         show: 详细信息
       accounts:
         controller: "账目"
-        index: "列表"
+        index: "账目列表"
         new: "添加"
         edit: "修改"
         show: "详细信息"
         new_detail: "添加明细"
       account_details:
         controller: "账目明细"
-        index: "列表"
-        new: "添加"
+        index: "详细"
+        new: "入账"
         edit: "修改"
         show: "详细信息"
   buttons:

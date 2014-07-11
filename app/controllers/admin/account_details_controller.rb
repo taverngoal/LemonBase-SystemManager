@@ -1,14 +1,16 @@
 class Admin::AccountDetailsController < Admin::BaseController
   load_and_authorize_resource
   skip_load_resource :only => [:create]
-  add_breadcrumb :controller, action: :index
-  before_action :set_admin_account_detail, only: [:show, :edit, :update, :destroy]
+  before_action do
+    add_breadcrumb I18n.t('breadcrumbs.admin.accounts.controller'), admin_accounts_path #
+  end
+  before_action :set_admin_account_detail, only: [:show, :edit, :update, :destroy] #
   before_action :set_admin_account
 
   # GET /admin/account_details
   # GET /admin/account_details.json
   def index
-    add_breadcrumb :index, :index
+
     @admin_account_details = initialize_grid(AccountDetail.where(:account => @admin_account).order('created_at DESC'), per_page: 20)
     @last_details = [] # sum的集合
     @last_amounts = [] # 金额变化集合
@@ -94,6 +96,7 @@ class Admin::AccountDetailsController < Admin::BaseController
 
   def set_admin_account
     @admin_account = Account.find(params[:account_id])
+    add_breadcrumb @admin_account.title, action: :index #
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
