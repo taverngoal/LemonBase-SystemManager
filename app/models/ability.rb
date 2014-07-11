@@ -8,13 +8,17 @@ class Ability
       can :manage, :all
     else
       can :update, User, id: user.id # 只能修改自己
-      cannot :destroy, User
+
       can :create, Account
-      can [:update, :destroy], Account do |account|
-        account.officer == user
-      end
+      can [:update, :destroy], Account, officer: user
       can :read, Account do |account|
         account.officer == user || account.is_public
+      end
+
+      can :create, AccountDetail
+      can [:update, :destroy], AccountDetail, :account => {officer: user}
+      can :read, AccountDetail do |detail|
+        detail.account.officer==user || detail.account.is_public
       end
     end
     # Define abilities for the passed in user here. For example:

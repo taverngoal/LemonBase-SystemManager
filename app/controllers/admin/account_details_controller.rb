@@ -1,4 +1,6 @@
 class Admin::AccountDetailsController < Admin::BaseController
+  load_and_authorize_resource
+  skip_load_resource :only => [:create]
   add_breadcrumb :controller, action: :index
   before_action :set_admin_account_detail, only: [:show, :edit, :update, :destroy]
   before_action :set_admin_account
@@ -16,6 +18,7 @@ class Admin::AccountDetailsController < Admin::BaseController
       @last_amounts << i.amount
       @last_records << i.created_at.strftime('%m月%d日 %H:%M')
     end
+    authorize! :read, @admin_account
 
   end
 
@@ -29,6 +32,8 @@ class Admin::AccountDetailsController < Admin::BaseController
   def new
     add_breadcrumb :new, :new
     @admin_account_detail = AccountDetail.new
+
+    authorize! :update, @admin_account
   end
 
   # GET /admin/account_details/1/edit

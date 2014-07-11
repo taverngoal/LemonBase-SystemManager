@@ -64,7 +64,7 @@
 
   g.column name: t('activerecord.attributes.account_detail.sum') do |app|
 
-    raw "<span class=\"label #{span_sum_class app.sum}\">#{app.sum}</span>"
+    raw "<span class=\"label #{span_sum_class app.sum}\">#{'¥'+app.sum.to_s}</span>"
   end
   g.column name: t('activerecord.attributes.account_detail.amount') do |app|
     raw "<span class=\"label label-warning\">#{'¥'+ app.amount.to_s}</span>"
