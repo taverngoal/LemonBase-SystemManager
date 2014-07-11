@@ -10,8 +10,7 @@ class Admin::AccountDetailsController < Admin::BaseController
   # GET /admin/account_details
   # GET /admin/account_details.json
   def index
-
-    @admin_account_details = initialize_grid(AccountDetail.where(:account => @admin_account).order('created_at DESC'), per_page: 20)
+    @admin_account_details = initialize_grid(AccountDetail.where(:account => @admin_account).order('created_at DESC'), per_page: 10)
     @last_details = [] # sum的集合
     @last_amounts = [] # 金额变化集合
     @last_records = [] # 最后的记录，时间集合
