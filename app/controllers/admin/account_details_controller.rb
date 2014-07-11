@@ -14,10 +14,10 @@ class Admin::AccountDetailsController < Admin::BaseController
     @last_details = [] # sum的集合
     @last_amounts = [] # 金额变化集合
     @last_records = [] # 最后的记录，时间集合
-    @admin_account.account_details.select(:sum, :amount, :created_at).last(10).each do |i|
-      @last_details << i.sum
-      @last_amounts << i.amount
-      @last_records << i.created_at.strftime('%m月%d日 %H:%M')
+    @admin_account_details.each do |i|
+      @last_details.unshift i.sum
+      @last_amounts.unshift i.amount
+      @last_records.unshift i.created_at.strftime('%m月%d日 %H:%M')
     end
     authorize! :read, @admin_account
 
