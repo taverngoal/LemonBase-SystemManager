@@ -18,7 +18,7 @@
           <input id="password" class="form-control input-lg" type="password" name="user[password]">
           <% if @errors %>
               <div class="error">
-                <%= @errors[:password][0] if  @errors[:password] %>
+                <%= @errors[:password].join ',' if  @errors[:password] %>
               </div>
           <% end %>
         </div>
@@ -27,7 +27,7 @@
           <input id="password_confirmation" class="form-control input-lg" type="password" name="user[password_confirmation]">
           <% if @errors %>
               <div class="error">
-                <%= @errors[:password_confirmation][0] if  @errors[:password_confirmation] %>
+                <%= @errors[:password_confirmation].join ',' if  @errors[:password_confirmation] %>
               </div>
           <% end %>
         </div>
