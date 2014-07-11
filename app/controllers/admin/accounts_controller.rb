@@ -29,14 +29,6 @@ class Admin::AccountsController < Admin::BaseController
     add_breadcrumb :edit, :edit
   end
 
-  def new_detail
-    @account_detail = AccountDetail.new
-  end
-
-  def create_detail
-
-  end
-
   # POST /admin/accounts
   # POST /admin/accounts.json
   def create
