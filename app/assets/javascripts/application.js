@@ -17,4 +17,6 @@
 //= require wice_grid
 //= require turbolinks
 //= require Chart.min.js
+//= require select2.min.js
+//= require select2_locale_zh-CN.js
 //= require_tree .
