@@ -21,12 +21,14 @@ class Admin::AccountsController < Admin::BaseController
   # GET /admin/accounts/new
   def new
     add_breadcrumb :new, :new
+
     @admin_account = Account.new
   end
 
   # GET /admin/accounts/1/edit
   def edit
     add_breadcrumb :edit, :edit
+    @users = User.all
   end
 
   # POST /admin/accounts

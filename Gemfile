@@ -31,6 +31,8 @@ gem 'sorcery'
 gem 'grape'
 gem 'cancan'
 
+gem 'select2-rails'
+
 
 # group :linux do
 #   gem 'therubyracer'
