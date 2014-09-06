@@ -34,6 +34,9 @@ gem 'cancan'
 gem 'select2-rails'
 
 
+gem 'rack-cors'
+
+
 # group :linux do
 #   gem 'therubyracer'
 #   gem 'mysql2'

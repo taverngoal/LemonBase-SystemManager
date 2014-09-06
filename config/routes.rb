@@ -1,7 +1,10 @@
 require './app/api/basic'
 Rails.application.routes.draw do
 
-  mount BasicAPI => '/api/basic'
+
+  mount BasicAPI => '/api'
+  # mount UserApi => '/api/users'
+
   get 'admin/index'
   get 'home/index'
   get 'home/page_index'
