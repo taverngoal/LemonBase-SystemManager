@@ -1,8 +1,19 @@
 class UserApi < Grape::API
+  helpers BasicAPI::GeneralHelpers
 
   resource :users do
+    params do
+      use :pagination
+    end
     get do
-      User.all().select(:email, :name, :nick, :birth, :address, :phone, :id)
+      pagination!(User.all().select(:email, :name, :nick, :birth, :address, :phone, :id))
+    end
+
+    params do
+      requires :id, type: Integer
+    end
+    get '/:id' do
+      User.find(params[:id])
     end
 
 
