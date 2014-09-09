@@ -1,9 +1,15 @@
 class BasicAPI < Grape::API
   format :json
+  http_basic do |username, password|
+    App.authorize! username, password
+
+  end
+
+  http_digest do
+
+  end
 
   before do
-    access_key = headers[:access_key]
-    p env
   end
 
   mount UserApi

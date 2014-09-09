@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708174016) do
+ActiveRecord::Schema.define(version: 20140908085331) do
 
   create_table "account_details", force: true do |t|
     t.string   "title",                    null: false
@@ -51,11 +51,12 @@ ActiveRecord::Schema.define(version: 20140708174016) do
     t.boolean  "enable",                      default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "salt",                        default: ""
   end
 
   create_table "configs", force: true do |t|
-    t.string "key",                null: false
-    t.text   "value", default: "", null: false
+    t.string "key",   null: false
+    t.text   "value", null: false
   end
 
   create_table "users", force: true do |t|
