@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 20140908085331) do
   end
 
   create_table "configs", force: true do |t|
-    t.string "key",   null: false
-    t.text   "value", null: false
+    t.string "key",                null: false
+    t.text   "value", default: "", null: false
   end
 
   create_table "users", force: true do |t|

@@ -1,12 +1,7 @@
 class BasicAPI < Grape::API
   format :json
   http_basic do |username, password|
-    App.authorize! username, password
-
-  end
-
-  http_digest do
-
+    { 'test' => 'password1' }[username] == password
   end
 
   before do
