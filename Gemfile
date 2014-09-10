@@ -32,7 +32,7 @@ gem 'grape'
 gem 'cancan'
 
 gem 'select2-rails'
-
+gem 'rest-client'
 
 gem 'rack-cors'
 

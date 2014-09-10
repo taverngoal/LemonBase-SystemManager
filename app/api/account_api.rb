@@ -1,6 +1,7 @@
 class AccountApi < Grape::API
   helpers BasicAPI::GeneralHelpers
 
+
   before do
     @account = Account.find(params[:id].to_i) if params[:id]
     @user = User.find(params[:user_id].to_i) if params[:user_id]
@@ -88,8 +89,3 @@ class AccountApi < Grape::API
     end
   end
 end
-
-require 'rest-client'
-r = RestClient.new url: 'localhost:3000/api/accounts', method: 'post', user:'123',password:'321',payload:
-    '{"title":"haha","amount":123, "is_public":false, "user_id":1}'
-r.execute
