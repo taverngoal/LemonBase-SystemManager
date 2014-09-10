@@ -17,9 +17,6 @@ class BasicAPI < Grape::API
     end
   end
 
-  before do
-  end
-
   mount UserApi
   mount AccountApi
 

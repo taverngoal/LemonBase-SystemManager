@@ -7,7 +7,6 @@ class AccountApi < Grape::API
   end
 
   resources :accounts do
-
     post 'test' do
       p params
     end
@@ -80,11 +79,12 @@ class AccountApi < Grape::API
         end
         post do
           AccountDetail.transaction do
-            account_detail = AccountDetail.new(admin_account_detail_params)
-            account_detail.user = @user
-            account_detail.account_id = params[:id]
-            @account.amount += account_detail.sum
-            account_detail.amount = @account.amount
+            account_detail, account_detail.user, account_detail.account_id, @account.amount, account_detail.amount =
+                AccountDetail.new(admin_account_detail_params), @user, params[:id], account_detail.sum, @account.amount
+            # account_detail.user = @user
+            # account_detail.account_id = params[:id]
+            # @account.amount += account_detail.sum
+            # account_detail.amount = @account.amount
             (account_detail.errors unless account_detail.save) || account_detail
           end
         end
