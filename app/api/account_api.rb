@@ -7,10 +7,6 @@ class AccountApi < Grape::API
   end
 
   resources :accounts do
-    post 'test' do
-      p params
-    end
-
     desc '获取公开账目和自己创建的账目'
     params do
       requires :user_id, type: Integer
@@ -93,5 +89,7 @@ class AccountApi < Grape::API
   end
 end
 
-
-
+require 'rest-client'
+r = RestClient.new url: 'localhost:3000/api/accounts', method: 'post', user:'123',password:'321',payload:
+    '{"title":"haha","amount":123, "is_public":false, "user_id":1}'
+r.execute
