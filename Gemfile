@@ -35,7 +35,6 @@ gem 'select2-rails'
 
 
 gem 'rack-cors'
-gem 'rest-client'
 
 
 # group :linux do

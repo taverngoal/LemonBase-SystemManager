@@ -7,6 +7,11 @@ class AccountApi < Grape::API
   end
 
   resources :accounts do
+
+    post 'test' do
+      p params
+    end
+
     desc '获取公开账目和自己创建的账目'
     params do
       requires :user_id, type: Integer
@@ -18,17 +23,15 @@ class AccountApi < Grape::API
 
     desc '添加账目'
     params do
-      requires :account do
-        requires :title, type: String
-        requires :amount, type: Float, default: 0.0
-        requires :creator, type: Integer
-        requires :officer, type: Integer
-        requires :is_public, type: Boolean, default: false
-      end
+      requires :title, type: String
+      requires :amount, type: Float, default: 0.0
+      requires :is_public, type: Boolean, default: false
+      requires :user_id, type: Integer
     end
     post do
-      account= Account.new params[:account]
-      account.save
+      account, account.creator, account.officer =
+          Account.new(title: params[:title], amount: params[:amount], creator: @user, officer: @user, is_public: params[:is_public]), @user, @user
+      (account.errors unless account.save) || account
     end
 
     desc '对某账目进行操作'
@@ -82,7 +85,7 @@ class AccountApi < Grape::API
             account_detail.account_id = params[:id]
             @account.amount += account_detail.sum
             account_detail.amount = @account.amount
-            account_detail.save
+            (account_detail.errors unless account_detail.save) || account_detail
           end
         end
       end
