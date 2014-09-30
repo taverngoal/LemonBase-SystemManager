@@ -1,7 +1,10 @@
 class BasicAPI < Grape::API
   format :json
+
   http_basic do |username, password|
-    App.authorize! username, password
+    @current_user ||= User.authenticate(username, password)
+    @current_user!=nil
+    # App.authorize! username, password
   end
 
   module GeneralHelpers
@@ -15,6 +18,21 @@ class BasicAPI < Grape::API
       page, count= params[:page], params[:count]
       obj.limit(count).offset(page*count)
     end
+  end
+
+  helpers do
+    def current_user
+      @current_user
+    end
+
+    def authenticate! *args
+      ::Ability.new(@current_user).authorize!(*args)
+    end
+
+  end
+
+  rescue_from CanCan::AccessDenied do |e|
+    error_response status: 401, message: 'UnAuthorized!'
   end
 
   mount UserApi

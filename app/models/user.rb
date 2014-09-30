@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :created_accounts, class_name: 'Account', foreign_key: :creator
   has_many :managed_accounts, class_name: 'Account', foreign_key: :officer
+
+  def available_accounts
+    Account.where('is_public = ? OR officer = ?', true, self.id)
+  end
 end

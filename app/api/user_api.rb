@@ -10,10 +10,9 @@ class UserApi < Grape::API
       use :pagination
     end
     get do
-      pagination! User.all().select(:email, :name, :nick, :birth, :address, :phone, :id)
+      users = pagination! User.all().select(:email, :name, :nick, :birth, :address, :phone, :id)
+      authenticate! :read, users
     end
-
-
 
     params do
       requires :email, type: String, regexp: /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
@@ -25,6 +24,7 @@ class UserApi < Grape::API
       optional :phone, type: String
     end
     post do
+      authenticate! :create, User
       user = User.new email: params[:email], password: params[:password], password_confirmation: params[:password],
                       name: params[:name], nick: params[:nick], birth: params[:birth],
                       address: params[:address], phone: params[:phone]
@@ -37,9 +37,11 @@ class UserApi < Grape::API
     namespace ':id' do
       get do
         @user
+        authenticate! @user
       end
 
       delete do
+        authenticate! :destroy, @user
         @user.errors unless @user.destroy
       end
 
@@ -53,6 +55,7 @@ class UserApi < Grape::API
         optional :phone, type: String
       end
       put do
+        authenticate! :update, @user
         @user.update_attributes email: params[:email], password: params[:password], password_confirmation: params[:password],
                                 name: params[:name], nick: params[:nick], birth: params[:birth],
                                 address: params[:address], phone: params[:phone]
