@@ -1,3 +1,5 @@
+require 'grape'
+require 'cancan'
 class BasicAPI < Grape::API
   format :json
 
@@ -35,6 +37,9 @@ class BasicAPI < Grape::API
     error_response status: 401, message: 'UnAuthorized!'
   end
 
+
+  require File.expand_path('../account_api', __FILE__)
+  require File.expand_path('../user_api', __FILE__)
   mount UserApi
   mount AccountApi
 
