@@ -6,6 +6,7 @@ class UserApi < Grape::API
   end
 
   resource :users do
+    desc '获取所有用户列表'
     params do
       use :pagination
     end
@@ -14,6 +15,7 @@ class UserApi < Grape::API
       authenticate! :read, users
     end
 
+    desc '创建用户'
     params do
       requires :email, type: String, regexp: /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
       requires :password, type: String
@@ -35,16 +37,21 @@ class UserApi < Grape::API
       requires :id, type: Integer
     end
     namespace ':id' do
+
+      desc '获取某个用户'
       get do
         @user
         authenticate! @user
       end
 
+      desc '删除某个用户'
       delete do
         authenticate! :destroy, @user
         @user.errors unless @user.destroy
       end
 
+
+      desc '修改某个用户'
       params do
         requires :email, type: String, regexp: /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
         optional :password, type: String
