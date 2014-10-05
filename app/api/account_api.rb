@@ -1,17 +1,17 @@
 class AccountApi < Grape::API
   helpers BasicAPI::GeneralHelpers
 
-  before do
-    @account = Account.find(params[:id].to_i) if params[:id]
-  end
 
   resources :accounts do
+    before do
+      @account = Account.find(params[:id].to_i) if params[:id]
+    end
     desc '获取公开账目和自己创建的账目'
     params do
       use :pagination
     end
     get do
-      accounts= pagination! @current_user.available_accounts
+      accounts= pagination! Account.all
       authenticate! :read, accounts
     end
 

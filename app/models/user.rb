@@ -1,3 +1,4 @@
+require 'base64'
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
@@ -15,4 +16,11 @@ class User < ActiveRecord::Base
   def available_accounts
     Account.where('is_public = ? OR officer = ?', true, self.id)
   end
+
+  def self.auth_with_basic authcode
+    username, psd = Base64.decode64(authcode).split(':')
+    User.authenticate(username, psd)
+  end
+
+
 end

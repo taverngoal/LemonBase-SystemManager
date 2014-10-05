@@ -1,11 +1,11 @@
 class UserApi < Grape::API
   helpers BasicAPI::GeneralHelpers
 
-  before do
-    @user = User.find params[:id] if params[:id]
-  end
 
   resource :users do
+    before do
+      @user = User.find params[:id] if params[:id]
+    end
     desc '获取所有用户列表'
     params do
       use :pagination

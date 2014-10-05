@@ -1,12 +1,10 @@
 require 'grape'
 require 'cancan'
 class BasicAPI < Grape::API
-  format :json
-
-  http_basic do |username, password|
-    @current_user ||= User.authenticate(username, password)
-    @current_user!=nil
-    # App.authorize! username, password
+  # format :json
+  before do
+    error!('401 Unauthorized', 401) unless headers['Lemon-Auth'] and
+        (@current_user=User.auth_with_basic headers['Lemon-Auth'])
   end
 
   module GeneralHelpers
@@ -34,7 +32,7 @@ class BasicAPI < Grape::API
   end
 
   rescue_from CanCan::AccessDenied do |e|
-    error_response status: 401, message: 'UnAuthorized!'
+    error_response status: 403, message: '403 Forbidden!'
   end
 
 
