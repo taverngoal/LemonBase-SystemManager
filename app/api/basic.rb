@@ -35,6 +35,10 @@ class BasicAPI < Grape::API
     error_response status: 403, message: '403 Forbidden!'
   end
 
+  get :test do
+    {success: true}
+  end
+
 
   require File.expand_path('../account_api', __FILE__)
   require File.expand_path('../user_api', __FILE__)
