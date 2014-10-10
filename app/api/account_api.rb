@@ -13,6 +13,7 @@ class AccountApi < Grape::API
     get do
       accounts= pagination! Account.all
       authenticate! :read, accounts
+      accounts.as_json(include: [creator: {only: [:name]}, officer: {only: [:name]}])
     end
 
     desc '添加账目'
@@ -58,6 +59,7 @@ class AccountApi < Grape::API
         get do
           details = pagination! @account.account_details
           authenticate! :read, details
+          details.as_json(include: [:user => {only: [:name]}])
         end
 
         desc '获取单个账目详细'
