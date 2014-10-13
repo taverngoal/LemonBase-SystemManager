@@ -13,6 +13,7 @@ class AccountApi < Grape::API
     get do
       accounts= pagination! Account.all.order('created_at DESC')
       authenticate! :read, accounts
+      header 'total', Account.all.length.to_s
       accounts.as_json(include: [creator: {only: [:name]}, officer: {only: [:name]}])
     end
 
@@ -59,6 +60,7 @@ class AccountApi < Grape::API
         get do
           details = pagination! @account.account_details
           authenticate! :read, details
+          header 'total', @account.account_details.length.to_s
           details.as_json(include: [:user => {only: [:name]}])
         end
 

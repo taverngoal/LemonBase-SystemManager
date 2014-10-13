@@ -11,7 +11,7 @@ class BasicAPI < Grape::API
     extend Grape::API::Helpers
     params :pagination do
       optional :page, type: Integer, default: 0, desc: '第几页'
-      optional :count, type: Integer, default: 20, desc: '获取多少条数据'
+      optional :count, type: Integer, default: 10, desc: '获取多少条数据'
     end
 
     def pagination!(obj)
