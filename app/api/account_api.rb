@@ -11,7 +11,7 @@ class AccountApi < Grape::API
       use :pagination
     end
     get do
-      accounts= pagination! Account.all
+      accounts= pagination! Account.all.order('created_at DESC')
       authenticate! :read, accounts
       accounts.as_json(include: [creator: {only: [:name]}, officer: {only: [:name]}])
     end
