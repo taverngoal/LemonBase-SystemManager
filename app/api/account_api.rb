@@ -58,7 +58,7 @@ class AccountApi < Grape::API
           use :pagination
         end
         get do
-          details = pagination! @account.account_details
+          details = pagination! @account.account_details.order('created_at DESC')
           authenticate! :read, details
           header 'total', @account.account_details.length.to_s
           details.as_json(include: [:user => {only: [:name]}])
