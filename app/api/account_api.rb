@@ -77,19 +77,22 @@ class AccountApi < Grape::API
         params do
           requires :title, type: String
           requires :sum, type: Float
-          requires :memo, type: String
-          requires :purpose, type: String
+          optional :memo, type: String
+          optional :purpose, type: String
         end
         post do
 
           AccountDetail.transaction do
-            account_detail, account_detail.user, account_detail.account_id, @account.amount, account_detail.amount =
-                AccountDetail.new(admin_account_detail_params), @current_user, params[:id], account_detail.sum, @account.amount
+            account_detail, account_detail.user, account_detail.account_id, account_detail.amount =
+                AccountDetail.new(title: params[:title], sum: params[:sum], memo:params[:memo], purpose:params[:purpose]),
+                    @current_user, params[:id], @account.amount
+            @account.amount += account_detail.sum
+            account_detail.amount = @account.amount
             # account_detail.user = @current_user
             # account_detail.account_id = params[:id]
             # @account.amount += account_detail.sum
-            # account_detail.amount = @account.amount
             authenticate! :create, account_detail
+            @account.save
             (account_detail.errors unless account_detail.save) || account_detail
           end
         end
