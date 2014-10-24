@@ -35,8 +35,9 @@ class BasicAPI < Grape::API
     error_response status: 403, message: '403 Forbidden!'
   end
 
-  get :test do
-    {success: true}
+  get :login do
+    user =@current_user.as_json(only: [:id, :name, :nick, :email, :phone, :photo_url, :birth, :admin, :address])
+    {success: true, user: user}
   end
 
 
