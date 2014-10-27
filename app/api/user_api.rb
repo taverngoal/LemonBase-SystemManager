@@ -66,6 +66,7 @@ class UserApi < Grape::API
         @user.update_attributes email: params[:email],
                                 name: params[:name], nick: params[:nick], birth: params[:birth],
                                 address: params[:address], phone: params[:phone]
+        @user.update_attributes password: params[:password], password_confirmation: params[:password_confirmation] if params[:password]
         unless @user.save
           @user.errors
         end
