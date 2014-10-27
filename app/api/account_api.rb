@@ -45,10 +45,14 @@ class AccountApi < Grape::API
       desc '修改账目'
       params do
         requires :title, type: String
+        optional :is_public, type: Boolean
       end
-      put do
+      post do
         authenticate! :update, @account
-        @account.update_attributes title: params[:title]
+        @account.update_attributes title: params[:title], is_public: params[:is_public]
+        unless @account.save
+          @account.errors
+        end
       end
 
       desc '账目详细的操作'
@@ -84,7 +88,7 @@ class AccountApi < Grape::API
 
           AccountDetail.transaction do
             account_detail, account_detail.user, account_detail.account_id, account_detail.amount =
-                AccountDetail.new(title: params[:title], sum: params[:sum], memo:params[:memo], purpose:params[:purpose]),
+                AccountDetail.new(title: params[:title], sum: params[:sum], memo: params[:memo], purpose: params[:purpose]),
                     @current_user, params[:id], @account.amount
             @account.amount += account_detail.sum
             account_detail.amount = @account.amount

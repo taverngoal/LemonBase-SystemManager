@@ -33,6 +33,12 @@ class UserApi < Grape::API
       (user.errors unless user.save) || user
     end
 
+    desc '用户登录'
+    get :login do
+      user =@current_user.as_json(only: [:id, :name, :nick, :email, :phone, :photo_url, :birth, :admin, :address])
+      {success: true, user: user}
+    end
+
     params do
       requires :id, type: Integer
     end
@@ -61,7 +67,7 @@ class UserApi < Grape::API
         optional :address, type: String
         optional :phone, type: String
       end
-      put do
+      post do
         authenticate! :update, @user
         @user.update_attributes email: params[:email],
                                 name: params[:name], nick: params[:nick], birth: params[:birth],
