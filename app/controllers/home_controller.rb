@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   layout 'application'
 
   def index
+    p request.subdomains
   end
 
   def page_index

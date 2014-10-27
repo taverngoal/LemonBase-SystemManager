@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
   # validates :password_confirmation, presence: true
 
+  validates :nick, uniqueness: true
+
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :email, format: {with: /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/, :multiline => true, message: '邮件格式不对'}
