@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   layout 'application'
 
   def index
+    render :'home/blog', :layout => 'blog'
   end
 
   def page_index

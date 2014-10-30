@@ -35,7 +35,7 @@ gem 'select2-rails'
 gem 'rest-client'
 
 gem 'rack-cors'
-
+gem 'bower-rails'
 
 # group :linux do
 #   gem 'therubyracer'
