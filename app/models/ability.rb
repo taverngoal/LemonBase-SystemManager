@@ -6,6 +6,7 @@ class Ability
 
     if user.admin?
       can :manage, :all
+      # cannot :show, Account
     else
       can :update, User, id: user.id # 只能修改自己
 
@@ -15,7 +16,7 @@ class Ability
         account.officer == user || account.is_public
       end
 
-      can :create, AccountDetail
+      can :create, AccountDetail, :account => {officer: user}
       can [:update, :destroy], AccountDetail, :account => {officer: user}
       can :read, AccountDetail do |detail|
         detail.account.officer==user || detail.account.is_public

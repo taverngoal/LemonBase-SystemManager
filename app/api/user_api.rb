@@ -1,20 +1,21 @@
 class UserApi < Grape::API
   helpers BasicAPI::GeneralHelpers
 
-  before do
-    @user = User.find params[:id] if params[:id]
-  end
 
   resource :users do
+    before do
+      @user = User.find params[:id] if params[:id]
+    end
+    desc '获取所有用户列表'
     params do
       use :pagination
     end
     get do
-      pagination! User.all().select(:email, :name, :nick, :birth, :address, :phone, :id)
+      users = pagination! User.all().select(:email, :name, :nick, :birth, :address, :phone, :id)
+      authenticate! :read, users
     end
 
-
-
+    desc '创建用户'
     params do
       requires :email, type: String, regexp: /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
       requires :password, type: String
@@ -25,24 +26,38 @@ class UserApi < Grape::API
       optional :phone, type: String
     end
     post do
+      authenticate! :create, User
       user = User.new email: params[:email], password: params[:password], password_confirmation: params[:password],
                       name: params[:name], nick: params[:nick], birth: params[:birth],
                       address: params[:address], phone: params[:phone]
       (user.errors unless user.save) || user
     end
 
+    desc '用户登录'
+    get :login do
+      user =@current_user.as_json(only: [:id, :name, :nick, :email, :phone, :photo_url, :birth, :admin, :address])
+      {success: true, user: user}
+    end
+
     params do
       requires :id, type: Integer
     end
     namespace ':id' do
+
+      desc '获取某个用户'
       get do
         @user
+        authenticate! @user
       end
 
+      desc '删除某个用户'
       delete do
+        authenticate! :destroy, @user
         @user.errors unless @user.destroy
       end
 
+
+      desc '修改某个用户'
       params do
         requires :email, type: String, regexp: /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
         optional :password, type: String
@@ -52,10 +67,15 @@ class UserApi < Grape::API
         optional :address, type: String
         optional :phone, type: String
       end
-      put do
-        @user.update_attributes email: params[:email], password: params[:password], password_confirmation: params[:password],
+      post do
+        authenticate! :update, @user
+        @user.update_attributes email: params[:email],
                                 name: params[:name], nick: params[:nick], birth: params[:birth],
                                 address: params[:address], phone: params[:phone]
+        @user.update_attributes password: params[:password], password_confirmation: params[:password_confirmation] if params[:password]
+        unless @user.save
+          @user.errors
+        end
       end
     end
   end

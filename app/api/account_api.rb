@@ -2,19 +2,19 @@ class AccountApi < Grape::API
   helpers BasicAPI::GeneralHelpers
 
 
-  before do
-    @account = Account.find(params[:id].to_i) if params[:id]
-    @user = User.find(params[:user_id].to_i) if params[:user_id]
-  end
-
   resources :accounts do
+    before do
+      @account = Account.find(params[:id].to_i) if params[:id]
+    end
     desc '获取公开账目和自己创建的账目'
     params do
-      requires :user_id, type: Integer
       use :pagination
     end
-    get 'user/:user_id' do
-      pagination! Account.where('is_public = ? OR officer = ?', true, params[:user_id])
+    get do
+      accounts= pagination! Account.all.order('created_at DESC')
+      authenticate! :read, accounts
+      header 'total', Account.all.length.to_s
+      accounts.as_json(include: [creator: {only: [:name]}, officer: {only: [:name]}])
     end
 
     desc '添加账目'
@@ -22,11 +22,12 @@ class AccountApi < Grape::API
       requires :title, type: String
       requires :amount, type: Float, default: 0.0
       requires :is_public, type: Boolean, default: false
-      requires :user_id, type: Integer
     end
     post do
+      authenticate! :create, Account #判断账目创建权限
       account, account.creator, account.officer =
-          Account.new(title: params[:title], amount: params[:amount], creator: @user, officer: @user, is_public: params[:is_public]), @user, @user
+          Account.new(title: params[:title], amount: params[:amount], creator: @current_user, officer: @current_user,
+                      is_public: params[:is_public]), @current_user, @current_user
       (account.errors unless account.save) || account
     end
 
@@ -38,14 +39,20 @@ class AccountApi < Grape::API
       desc '按id获取账目'
       get do
         @account
+        authenticate! :show, @account
       end
 
       desc '修改账目'
       params do
         requires :title, type: String
+        optional :is_public, type: Boolean
       end
-      put do
-        @account.update_attributes title: params[:title]
+      post do
+        authenticate! :update, @account
+        @account.update_attributes title: params[:title], is_public: params[:is_public]
+        unless @account.save
+          @account.errors
+        end
       end
 
       desc '账目详细的操作'
@@ -55,7 +62,10 @@ class AccountApi < Grape::API
           use :pagination
         end
         get do
-          pagination! @account.account_details
+          details = pagination! @account.account_details.order('created_at DESC')
+          authenticate! :read, details
+          header 'total', @account.account_details.length.to_s
+          details.as_json(include: [:user => {only: [:name]}])
         end
 
         desc '获取单个账目详细'
@@ -63,25 +73,30 @@ class AccountApi < Grape::API
           requires :detail_id, type: Integer
         end
         get ':detail_id' do
-          @account.account_details.find(params[:detail_id])
+          detail= @account.account_details.find(params[:detail_id])
+          authenticate! :read, detail
         end
 
         desc '添加账目详细'
         params do
           requires :title, type: String
           requires :sum, type: Float
-          requires :memo, type: String
-          requires :purpose, type: String
-          requires :user_id, type: Integer
+          optional :memo, type: String
+          optional :purpose, type: String
         end
         post do
+
           AccountDetail.transaction do
-            account_detail, account_detail.user, account_detail.account_id, @account.amount, account_detail.amount =
-                AccountDetail.new(admin_account_detail_params), @user, params[:id], account_detail.sum, @account.amount
-            # account_detail.user = @user
+            account_detail, account_detail.user, account_detail.account_id, account_detail.amount =
+                AccountDetail.new(title: params[:title], sum: params[:sum], memo: params[:memo], purpose: params[:purpose]),
+                    @current_user, params[:id], @account.amount
+            @account.amount += account_detail.sum
+            account_detail.amount = @account.amount
+            # account_detail.user = @current_user
             # account_detail.account_id = params[:id]
             # @account.amount += account_detail.sum
-            # account_detail.amount = @account.amount
+            authenticate! :create, account_detail
+            @account.save
             (account_detail.errors unless account_detail.save) || account_detail
           end
         end
