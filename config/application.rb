@@ -37,6 +37,7 @@ module LemonBaseSystemmanager
         resource '/api/*', :headers => :any, :methods => [:get, :post, :options, :put, :delete]
       end
     end
+
     # config.autoload_paths += Dir[Rails.root.join('app', 'api', '*').to_s]
 
     # platform = RUBY_PLATFORM.match(/(linux|darwin)/)[0].to_sym

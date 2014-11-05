@@ -1,0 +1,143 @@
+<style>
+    ul li {
+        background: #ddd;
+        list-style: none;
+        overflow: hidden;
+        overflow-style: panner;
+    }
+</style>
+<div class="container" ng-app="APP" ng-controller="controller">
+
+  <div class="gridster" id="main">
+    <ul>
+      <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" drop></li>
+      <li data-row="2" data-col="1" data-sizex="1" data-sizey="1" drop></li>
+      <li data-row="3" data-col="1" data-sizex="1" data-sizey="1" drop></li>
+      <li data-row="1" data-col="2" data-sizex="2" data-sizey="1" drop></li>
+      <li data-row="2" data-col="2" data-sizex="2" data-sizey="2" drop></li>
+      <li data-row="1" data-col="4" data-sizex="1" data-sizey="1" drop></li>
+      <li data-row="2" data-col="4" data-sizex="2" data-sizey="1" drop></li>
+      <li data-row="3" data-col="4" data-sizex="1" data-sizey="1" drop></li>
+      <li data-row="1" data-col="5" data-sizex="1" data-sizey="1" drop></li>
+      <li data-row="3" data-col="5" data-sizex="1" data-sizey="1" drop></li>
+    </ul>
+  </div>
+  <textarea id="text" ng-model="string"></textarea>
+  <button draggable="true" drag>直接渲染</button>
+  <button draggable="true" drag_after>等待渲染</button>
+  <p>
+    <button ng-click="add_block()">添加块</button>
+    <button ng-click="gridster_enable()">enable</button>
+    <button ng-click="gridster_disable()">disable</button>
+    <button ng-click="go()">渲染</button>
+  </p>
+  <div id="result"></div>
+</div>
+<script>
+    angular.module('APP', ['ngResource'])
+            .config(["$httpProvider", function ($httpProvider) {
+                $httpProvider.interceptors.push(function ($q, $rootScope) {
+                    return {
+                        'request': function (config) {
+                            config.url = config.url.replace(/%2F/g, "/");
+                            config.headers['Lemon-Auth'] = 'd2luZGFja0BxcS5jb206MTk5MDEwMDE=';
+
+                            return config || $q.when(config);
+                        },
+                        'response': function (rejection) {
+                            return rejection || $q.when(rejection);
+                        },
+                        responseError: function (rejection) {
+                            return $q.reject(rejection);
+                        }
+                    }
+                })
+            }])
+            .controller('controller', ['$scope', '$resource', '$compile', function ($scope, $resource, $compile) {
+                var accounts = $resource("/api/accounts/:id", {id: "@id"});
+
+                $scope.gridster = $(".gridster ul").gridster({
+                    widget_margins: [5, 5],
+                    widget_base_dimensions: [20, 20],
+                    resize: {
+                        enabled: true
+                    }
+                }).data('gridster');
+
+                $scope.accounts = accounts.query();
+
+                $scope.string = "<p ng-repeat='a in accounts'>{{a.id}}</p>";
+
+                $scope.go = function () {
+                    $compile(angular.element('#main').contents())($scope);
+
+                }
+
+                $scope.drag_info = function (ele) {
+                    ele.prepend($scope.string);
+                    $compile(ele.contents())($scope);
+                    $scope.$$phase || $scope.$apply();
+                }
+                $scope.drag_after = function (ele) {
+                    ele.prepend($scope.string);
+                    $scope.$$phase || $scope.$apply();
+                }
+
+                $scope.add_block = function () {
+                    var li = '<li data-row="1" data-col="1" data-sizex="1" data-sizey="1" drop></li>'
+                    $scope.gridster.add_widget(li)
+                    console.log($(li).contents())
+                    $compile(angular.element(li).contents())($scope);
+                }
+
+                $scope.gridster_enable = function () {
+                    $scope.gridster.enable()
+                    $scope.gridster.enable_resize()
+                }
+                $scope.gridster_disable = function () {
+                    $scope.gridster.disable()
+                    $scope.gridster.disable_resize()
+                }
+
+            }])
+            .directive('drag', function () {
+                return function (scope, element, attrs) {
+                    element.on('dragstart', function () {
+                        scope.type = 'now'
+                    })
+                }
+            })
+            .directive('drag_after', function () {
+                return function (scope, element, attrs) {
+                    element.on('dragstart', function () {
+                        scope.type = 'after'
+                    })
+                }
+            })
+            .directive('drop', function () {
+                return function (scope, element, attrs) {
+                    element.on('dragover', function (e) {
+                        e.preventDefault()
+                    })
+                    element.on('drop', function (e) {
+                        e.preventDefault();
+                        if (scope.type == 'now')
+                            scope.drag_info(element)
+                        else
+                            scope.drag_after(element)
+//                        element.prepend('123')
+                    })
+                }
+            })
+    //            .directive('compile', function ($compile) {
+    //                return function (scope, element, attrs) {
+    //                    scope.$watch('string',
+    //                            function (value) {
+    //                                element.html(value);
+    //                                console.log(value)
+    //                                $compile(element.contents())(scope);
+    //                            }
+    //                    );
+    //                };
+    //            });
+</script>

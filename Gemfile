@@ -1,4 +1,5 @@
 source 'https://ruby.taobao.org'
+source 'https://rails-assets.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -35,7 +36,6 @@ gem 'select2-rails'
 gem 'rest-client'
 
 gem 'rack-cors'
-gem 'bower-rails'
 
 # group :linux do
 #   gem 'therubyracer'
@@ -57,3 +57,7 @@ gem 'bower-rails'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'thin'
+
+gem 'rails-assets-angular'
+gem 'rails-assets-gridster'
+gem 'rails-assets-angular-resource'
