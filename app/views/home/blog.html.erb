@@ -10,26 +10,26 @@
 
   <div class="gridster" id="main">
     <ul>
-      <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" drop></li>
-      <li data-row="2" data-col="1" data-sizex="1" data-sizey="1" drop></li>
-      <li data-row="3" data-col="1" data-sizex="1" data-sizey="1" drop></li>
-      <li data-row="1" data-col="2" data-sizex="2" data-sizey="1" drop></li>
-      <li data-row="2" data-col="2" data-sizex="2" data-sizey="2" drop></li>
-      <li data-row="1" data-col="4" data-sizex="1" data-sizey="1" drop></li>
-      <li data-row="2" data-col="4" data-sizex="2" data-sizey="1" drop></li>
-      <li data-row="3" data-col="4" data-sizex="1" data-sizey="1" drop></li>
-      <li data-row="1" data-col="5" data-sizex="1" data-sizey="1" drop></li>
-      <li data-row="3" data-col="5" data-sizex="1" data-sizey="1" drop></li>
+      <li data-row="1" data-col="1" data-sizex="1" data-id="1" data-sizey="1" drop></li>
+      <li data-row="2" data-col="1" data-sizex="1" data-id="1" data-sizey="1" drop></li>
+      <li data-row="3" data-col="1" data-sizex="1" data-id="1" data-sizey="1" drop></li>
+      <li data-row="1" data-col="2" data-sizex="2" data-id="1" data-sizey="1" drop></li>
+      <li data-row="2" data-col="2" data-sizex="2" data-id="1" data-sizey="2" drop></li>
+      <li data-row="1" data-col="4" data-sizex="1" data-id="1" data-sizey="1" drop></li>
+      <li data-row="2" data-col="4" data-sizex="2" data-id="1" data-sizey="1" drop></li>
+      <li data-row="3" data-col="4" data-sizex="1" data-id="1" data-sizey="1" drop></li>
+      <li data-row="1" data-col="5" data-sizex="1" data-id="1" data-sizey="1" drop></li>
+      <li data-row="3" data-col="5" data-sizex="1" data-id="1" data-sizey="1" drop></li>
     </ul>
   </div>
   <textarea id="text" ng-model="string"></textarea>
   <button draggable="true" drag>直接渲染</button>
-  <button draggable="true" drag_after>等待渲染</button>
+  <button draggable="true" drag-after>等待渲染</button>
   <p>
     <button ng-click="add_block()">添加块</button>
     <button ng-click="gridster_enable()">enable</button>
     <button ng-click="gridster_disable()">disable</button>
-    <button ng-click="go()">渲染</button>
+    <button ng-click="go()">渲染 {{type}}</button>
   </p>
   <div id="result"></div>
 </div>
@@ -59,6 +59,9 @@
                 $scope.gridster = $(".gridster ul").gridster({
                     widget_margins: [5, 5],
                     widget_base_dimensions: [20, 20],
+                    serialize_params: function ($w, wgd) {
+                        return { col: wgd.col, row: wgd.row, size_x: wgd.size_x, size_y: wgd.size_y }
+                    },
                     resize: {
                         enabled: true
                     }
@@ -68,14 +71,23 @@
 
                 $scope.string = "<p ng-repeat='a in accounts'>{{a.id}}</p>";
 
+                $("#main").find("li").on('dragover', function (e) {
+                    e.preventDefault()
+                }).on('drop', function (e) {
+                    e.preventDefault();
+                    if ($scope.type == 'now')
+                        $scope.drag_info($(this))
+                    else
+                        $scope.drag_after($(this))
+                });
+
+
                 $scope.go = function () {
                     $compile(angular.element('#main').contents())($scope);
-
                 }
 
                 $scope.drag_info = function (ele) {
                     ele.prepend($scope.string);
-                    $compile(ele.contents())($scope);
                     $scope.$$phase || $scope.$apply();
                 }
                 $scope.drag_after = function (ele) {
@@ -84,10 +96,17 @@
                 }
 
                 $scope.add_block = function () {
-                    var li = '<li data-row="1" data-col="1" data-sizex="1" data-sizey="1" drop></li>'
-                    $scope.gridster.add_widget(li)
-                    console.log($(li).contents())
-                    $compile(angular.element(li).contents())($scope);
+                    var li = '<li></li>'
+                    var ele=$scope.gridster.add_widget(li)
+                    $(ele).on('dragover', function (e) {
+                        e.preventDefault()
+                    }).on('drop', function (e) {
+                        e.preventDefault();
+                        if ($scope.type == 'now')
+                            $scope.drag_info($(this))
+                        else
+                            $scope.drag_after($(this))
+                    });
                 }
 
                 $scope.gridster_enable = function () {
@@ -107,28 +126,32 @@
                     })
                 }
             })
-            .directive('drag_after', function () {
+            .directive('dragAfter', function () {
                 return function (scope, element, attrs) {
                     element.on('dragstart', function () {
                         scope.type = 'after'
                     })
                 }
             })
-            .directive('drop', function () {
-                return function (scope, element, attrs) {
-                    element.on('dragover', function (e) {
-                        e.preventDefault()
-                    })
-                    element.on('drop', function (e) {
-                        e.preventDefault();
-                        if (scope.type == 'now')
-                            scope.drag_info(element)
-                        else
-                            scope.drag_after(element)
-//                        element.prepend('123')
-                    })
-                }
-            })
+//            .directive('drop', function () {
+//                return function (scope, element, attrs) {
+////                    element.unbind('drop');
+//                    element.unbind('dragover');
+//
+//                    element.on('dragover', function (e) {
+//                        e.preventDefault()
+//                    });
+//
+//
+//                    element.on('drop', function (e) {
+//                        e.preventDefault();
+//                        if (scope.type == 'now')
+//                            scope.drag_info(element)
+//                        else
+//                            scope.drag_after(element)
+//                    })
+//                }
+//            })
     //            .directive('compile', function ($compile) {
     //                return function (scope, element, attrs) {
     //                    scope.$watch('string',
