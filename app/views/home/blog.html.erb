@@ -87,11 +87,11 @@
                 }
 
                 $scope.drag_info = function (ele) {
-                    ele.prepend($scope.string);
+                    ele.prepend($("#text").val());
                     $scope.$$phase || $scope.$apply();
                 }
                 $scope.drag_after = function (ele) {
-                    ele.prepend($scope.string);
+                    ele.prepend($("#text").val());
                     $scope.$$phase || $scope.$apply();
                 }
 

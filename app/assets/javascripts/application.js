@@ -10,10 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// require jquery
+//= require jquery
 //= require jquery_ujs
-//=require jquery.pin.min.js
-// require twitter/bootstrap
+//= require jquery.pin.min.js
+//= require twitter/bootstrap
 //= require wice_grid
 //= require turbolinks
 //= require Chart.min.js
